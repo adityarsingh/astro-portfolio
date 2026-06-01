@@ -1,0 +1,28 @@
+---
+import type { GetStaticPaths } from 'astro';
+import PhotoLayout from '@/layouts/PhotoLayout.astro';
+import PhotoGrid from '@/components/PhotoGrid.astro';
+import Lightbox from '@/components/Lightbox.astro';
+import { getCollection } from 'astro:content';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const albums = await getCollection('photos');
+  return albums.map(album => ({
+    params: { album: album.id },
+    props: { album },
+  }));
+};
+
+const { album } = Astro.props;
+---
+
+<PhotoLayout
+  title={album.data.title}
+  description={album.data.description}
+  date={album.data.date}
+  location={album.data.location}
+  slug={album.id}
+>
+  <PhotoGrid images={album.data.images} />
+  <Lightbox />
+</PhotoLayout>

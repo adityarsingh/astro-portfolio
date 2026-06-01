@@ -1,0 +1,527 @@
+{
+  "title": "Nepal",
+  "description": "Trekking through the Himalayas — high passes, remote villages, and mountains that make everything else feel small.",
+  "date": "2025-12-01",
+  "coverImage": "/photos/nepal/DSC00363.jpg",
+  "coverAlt": "Himalayan panorama from a high ridge in Nepal",
+  "location": "Nepal",
+  "images": [
+    {
+      "src": "/photos/nepal/IMG_4861.jpg",
+      "alt": "Nepal trek trail winding through mountain terrain",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4864.jpg",
+      "alt": "Stone steps ascending a mountain trail",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4865.jpg",
+      "alt": "Prayer flags strung between mountain ridges",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4866.jpg",
+      "alt": "Early morning light on snow-capped peaks",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4867.jpg",
+      "alt": "Trekkers on a ridge with mountains behind",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4870.jpg",
+      "alt": "Himalayan valley stretching into the distance",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4878.jpg",
+      "alt": "Terraced fields on a hillside",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4890.jpg",
+      "alt": "Wooden teahouse along the trekking route",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4895.jpg",
+      "alt": "Mountain stream crossing on the trail",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4963.jpg",
+      "alt": "Sunset alpenglow on Himalayan summits",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4963-1.jpg",
+      "alt": "Peaks catching the last light of day",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_4974.jpg",
+      "alt": "Cloud inversion below a high viewpoint",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5001.jpg",
+      "alt": "Trek through a rhododendron forest",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5019.jpg",
+      "alt": "Snow on the trail at higher altitude",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5043.jpg",
+      "alt": "Yaks grazing on a high alpine meadow",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5044.jpg",
+      "alt": "Traditional Nepali mountain village",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5103.jpg",
+      "alt": "Mountain panorama from a high pass",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5118.jpg",
+      "alt": "Suspension bridge over a gorge",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5128.jpg",
+      "alt": "Colourful prayer flags at a mountain shrine",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5131.jpg",
+      "alt": "Trekking trail with Himalayan giants ahead",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5146.jpg",
+      "alt": "Snow peaks reflected in a glacial lake",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5168.jpg",
+      "alt": "Early morning mist in the Himalayan valley",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5178.jpg",
+      "alt": "Stone mani walls lining the trekking path",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5248.jpg",
+      "alt": "High altitude campsite with mountain views",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5259.jpg",
+      "alt": "Dramatic cloud formations over the Himalayas",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5260.jpg",
+      "alt": "Trek descending through alpine terrain",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5270.jpg",
+      "alt": "Summit view on a clear Himalayan morning",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5287.jpg",
+      "alt": "Golden light on snow-covered ridgelines",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5288.jpg",
+      "alt": "Vast Himalayan panorama at high altitude",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5301.jpg",
+      "alt": "Prayer wheels at a Himalayan monastery",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5317.jpg",
+      "alt": "Mountain teahouse with a view",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5318.jpg",
+      "alt": "Trek camp at the foot of a glacier",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5352.jpg",
+      "alt": "Himalayan summit at sunrise",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5360.jpg",
+      "alt": "Icicles hanging from a rock face",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5364.jpg",
+      "alt": "Himalayan monastery perched on a cliff",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5368.jpg",
+      "alt": "Clouds rolling in below the high ridge",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5377.jpg",
+      "alt": "Snow-capped peaks in the late afternoon",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5381.jpg",
+      "alt": "Trek crossing a frozen stream",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5393.jpg",
+      "alt": "Final push to the high pass",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5404.jpg",
+      "alt": "Standing at the top of a Himalayan pass",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5410.jpg",
+      "alt": "360-degree view from the summit",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5434.jpg",
+      "alt": "Descent through snowy forest",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5436.jpg",
+      "alt": "Ancient stupa on the trekking route",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5440.jpg",
+      "alt": "Mountain village at dusk",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5464.jpg",
+      "alt": "Sunset colours over the high Himalayas",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5476.jpg",
+      "alt": "Last camp of the trek at twilight",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5477.jpg",
+      "alt": "Stars above the Himalayan skyline",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/DSC00363.jpg",
+      "alt": "Wide-angle Himalayan panorama",
+      "width": 6000,
+      "height": 4000,
+      "caption": "Himalayan panorama"
+    },
+    {
+      "src": "/photos/nepal/DSC00405.jpg",
+      "alt": "Mountain face in sharp relief against a blue sky",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00431.jpg",
+      "alt": "Snow-covered peak captured on Sony camera",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00439.jpg",
+      "alt": "Rocky ridgeline with glaciers below",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00473.jpg",
+      "alt": "Mountain village with terraced fields",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00492.jpg",
+      "alt": "High-altitude landscape in crisp detail",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00516.jpg",
+      "alt": "Trek trail leading toward snow peaks",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00517.jpg",
+      "alt": "Glacial lake at the foot of a mountain",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00527.jpg",
+      "alt": "Long exposure of a mountain waterfall",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00533.jpg",
+      "alt": "Prayer flags fluttering over a mountain pass",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00535.jpg",
+      "alt": "Himalayan peak at close range",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00569.jpg",
+      "alt": "Golden morning light on the mountain face",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00579.jpg",
+      "alt": "Snow columns and seracs on a glacier",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00586.jpg",
+      "alt": "Himalayan ridgeline at sunset",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00610.jpg",
+      "alt": "Dramatic cloud formations over the peaks",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00615.jpg",
+      "alt": "Trek crossing a high alpine snowfield",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00631.jpg",
+      "alt": "Monastery in the mountains at dusk",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00633.jpg",
+      "alt": "Ancient carved stone with Buddhist script",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00652.jpg",
+      "alt": "View from a high bivouac in the Himalayas",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00671.jpg",
+      "alt": "Trek path through a high-altitude boulder field",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00674.jpg",
+      "alt": "Summit cairn with distant peaks",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00676.jpg",
+      "alt": "Descent toward a valley teahouse",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00709.jpg",
+      "alt": "River valley carved by glacial erosion",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00745.jpg",
+      "alt": "Himalayan massif reflected in still water",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00774.jpg",
+      "alt": "High camp with snow all around",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00784.jpg",
+      "alt": "Blue-hour light on the Himalayas",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00802.jpg",
+      "alt": "Glaciated peak emerging from clouds",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00816.jpg",
+      "alt": "Trek winding along a narrow ridgeline",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00824.jpg",
+      "alt": "Vast snowfield below a Himalayan summit",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00890.jpg",
+      "alt": "Trek crossing a high snowy plateau",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00895.jpg",
+      "alt": "Prayer flag wall at a mountain pass",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00901.jpg",
+      "alt": "Last light on the highest peak of the route",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00934.jpg",
+      "alt": "Mountain at golden hour on the final day",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/IDG_20251207_100004_443.jpg",
+      "alt": "Morning scene at the trek camp",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251207_100737_034.jpg",
+      "alt": "Group moment on the trail",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251207_112001_266.jpg",
+      "alt": "Midday break with mountain views",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251208_174922_580.jpg",
+      "alt": "Evening at camp on Day 2",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251208_174928_899.jpg",
+      "alt": "Sunset colours reflected in snowfields",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251208_180610_445.jpg",
+      "alt": "Twilight over the Himalayan camp",
+      "width": 4032,
+      "height": 3024
+    }
+  ]
+}

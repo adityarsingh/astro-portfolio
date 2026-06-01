@@ -1,0 +1,72 @@
+---
+import TagPill from './TagPill.astro';
+import { formatDate } from '@/lib/formatDate';
+import { readingTime } from '@/lib/readingTime';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  slug: string;
+  tags: string[];
+  rawContent?: string;
+}
+
+const { title, description, date, slug, tags, rawContent = '' } = Astro.props;
+const mins = readingTime(rawContent);
+---
+
+<a href={`/blog/${slug}`} class="blog-card card" data-tags={JSON.stringify(tags)}>
+  <article>
+    <div class="blog-card-meta">
+      <time datetime={date.toISOString()} class="text-caption-mono">
+        {formatDate(date, 'short')}
+      </time>
+      <span class="blog-card-sep" aria-hidden="true">·</span>
+      <span class="text-caption-mono">{mins} min read</span>
+    </div>
+    <h2 class="text-display-sm blog-card-title">{title}</h2>
+    <p class="text-body-sm blog-card-desc">{description}</p>
+    {tags.length > 0 && (
+      <div class="blog-card-tags">
+        {tags.slice(0, 3).map(tag => <TagPill tag={tag} />)}
+      </div>
+    )}
+  </article>
+</a>
+
+<style>
+.blog-card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+.blog-card article {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 100%;
+}
+.blog-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-mute);
+}
+.blog-card-sep { color: var(--color-hairline-strong); }
+.blog-card-title {
+  color: var(--color-ink);
+  transition: color 0.1s ease;
+}
+.blog-card:hover .blog-card-title { color: var(--color-link); }
+.blog-card-desc {
+  color: var(--color-body-text);
+  flex: 1;
+}
+.blog-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-top: 4px;
+}
+</style>

@@ -1,0 +1,377 @@
+---
+const navLinks = [
+  { href: '/blog', label: 'Blog' },
+  { href: '/photos', label: 'Photo Book' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header class="nav-bar">
+  <div class="nav-inner">
+    <a href="/" class="nav-logo" aria-label="Aditya Singh — Home">
+      <div class="nav-logo-mark" aria-hidden="true">AR</div>
+      <span class="nav-name">Aditya Singh</span>
+    </a>
+
+    <div class="nav-right">
+      <nav class="nav-links" aria-label="Main navigation">
+        {navLinks.map(({ href, label }) => (
+          <a
+            href={href}
+            class:list={['nav-link', { 'nav-link-active': currentPath.startsWith(href) }]}
+          >
+            {label}
+          </a>
+        ))}
+      </nav>
+
+      <a href="/cv" class="btn-nav" aria-label="Download CV">CV</a>
+
+      <button id="theme-toggle" class="theme-btn" aria-label="Toggle colour theme" title="Toggle light / dark mode">
+        <!-- Sun: shown in dark mode → click to go light -->
+        <svg class="icon-sun" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <line x1="12" y1="2"  x2="12" y2="4"/>
+          <line x1="12" y1="20" x2="12" y2="22"/>
+          <line x1="4.22" y1="4.22"  x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="2"  y1="12" x2="4"  y2="12"/>
+          <line x1="20" y1="12" x2="22" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <!-- Moon: shown in light mode → click to go dark -->
+        <svg class="icon-moon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+      </button>
+    </div>
+
+    <button
+      class="nav-hamburger"
+      aria-label="Open menu"
+      aria-expanded="false"
+      id="hamburger-btn"
+    >
+      <svg width="18" height="14" viewBox="0 0 18 14" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <line x1="0" y1="1" x2="18" y2="1"/>
+        <line x1="0" y1="7" x2="18" y2="7"/>
+        <line x1="0" y1="13" x2="18" y2="13"/>
+      </svg>
+    </button>
+  </div>
+</header>
+
+<dialog id="mobile-menu" aria-label="Navigation menu">
+  <div class="mobile-menu-header">
+    <a href="/" class="nav-logo" id="mobile-logo">
+      <div class="nav-logo-mark" aria-hidden="true">AR</div>
+      <span class="nav-name">Aditya Singh</span>
+    </a>
+    <button class="mobile-close" aria-label="Close menu" id="mobile-close-btn">
+      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+        <line x1="3" y1="3" x2="15" y2="15"/>
+        <line x1="15" y1="3" x2="3" y2="15"/>
+      </svg>
+    </button>
+  </div>
+  <nav class="mobile-nav">
+    {navLinks.map(({ href, label }) => (
+      <a href={href} class="mobile-nav-link">{label}</a>
+    ))}
+    <a href="/cv" class="mobile-nav-link">CV</a>
+  </nav>
+  <div class="mobile-footer">
+    <a href="https://linkedin.com/in/adityar-singh/" class="mobile-social" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+    <a href="https://github.com/adityarsingh" class="mobile-social" target="_blank" rel="noopener noreferrer">GitHub</a>
+    <a href="mailto:adityarsingh70@gmail.com" class="mobile-social">Email</a>
+  </div>
+</dialog>
+
+<script>
+  const hamburger = document.getElementById('hamburger-btn') as HTMLButtonElement | null;
+  const menu = document.getElementById('mobile-menu') as HTMLDialogElement | null;
+  const closeBtn = document.getElementById('mobile-close-btn');
+
+  hamburger?.addEventListener('click', () => {
+    menu?.showModal();
+    hamburger.setAttribute('aria-expanded', 'true');
+  });
+
+  closeBtn?.addEventListener('click', () => {
+    menu?.close();
+  });
+
+  menu?.addEventListener('close', () => {
+    hamburger?.setAttribute('aria-expanded', 'false');
+  });
+
+  // Close on backdrop click
+  menu?.addEventListener('click', (e) => {
+    if (e.target === menu) menu.close();
+  });
+
+  // Close mobile menu when a link is clicked
+  menu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => menu.close());
+  });
+
+  // ── Theme toggle ──
+  const themeToggle = document.getElementById('theme-toggle');
+
+  function switchTheme() {
+    const root = document.documentElement;
+    const isLight = root.getAttribute('data-theme') === 'light';
+
+    // Enable transitions only during the switch
+    root.style.setProperty('--theme-transition', '0.25s');
+    root.classList.add('theme-switching');
+
+    if (isLight) {
+      root.removeAttribute('data-theme');
+      root.style.colorScheme = 'dark';
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.setAttribute('data-theme', 'light');
+      root.style.colorScheme = 'light';
+      localStorage.setItem('theme', 'light');
+    }
+
+    // Remove transition class after animation completes
+    setTimeout(() => {
+      root.style.removeProperty('--theme-transition');
+      root.classList.remove('theme-switching');
+    }, 300);
+  }
+
+  themeToggle?.addEventListener('click', switchTheme);
+</script>
+
+<style>
+.nav-bar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  height: var(--nav-height);
+  background-color: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  height: 100%;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nav-logo {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  text-decoration: none;
+  color: var(--color-ink);
+  flex-shrink: 0;
+}
+
+.nav-logo-mark {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  background: var(--color-primary);
+  color: var(--color-on-primary);
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  letter-spacing: 0.02em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.nav-name {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.nav-link {
+  color: var(--color-body-text);
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-decoration: none;
+  padding: 6px 10px;
+  border-radius: 9999px;
+  transition: background-color 0.12s ease, color 0.12s ease;
+}
+.nav-link:hover {
+  background-color: var(--color-canvas-soft-2);
+  color: var(--color-ink);
+}
+.nav-link-active {
+  color: var(--color-ink);
+  font-weight: 500;
+}
+
+.theme-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-body-text);
+  margin-left: 4px;
+  padding: 0;
+}
+.theme-btn:hover {
+  background-color: var(--color-canvas-soft-2);
+  color: var(--color-ink);
+}
+
+/* Dark mode (default): show sun, hide moon */
+.theme-btn .icon-moon { display: none; }
+.theme-btn .icon-sun  { display: block; }
+
+/* Light mode: show moon, hide sun */
+html[data-theme="light"] .theme-btn .icon-sun  { display: none; }
+html[data-theme="light"] .theme-btn .icon-moon { display: block; }
+
+.btn-nav {
+  margin-left: 8px;
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--color-primary);
+  color: var(--color-on-primary);
+  border-radius: var(--radius-sm);
+  padding: 0 12px;
+  height: 30px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  letter-spacing: -0.01em;
+}
+.btn-nav:hover { opacity: 0.8; }
+
+.nav-hamburger {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-ink);
+  padding: 0;
+}
+.nav-hamburger:hover { background-color: var(--color-canvas-soft-2); }
+
+@media (max-width: 640px) {
+  .nav-right   { display: none; }
+  .nav-hamburger { display: flex; }
+}
+
+/* ── Mobile dialog ── */
+#mobile-menu {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  max-width: 100%;
+  height: 100%;
+  max-height: 100%;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background-color: var(--color-canvas);
+  display: flex;
+  flex-direction: column;
+}
+#mobile-menu:not([open]) { display: none; }
+#mobile-menu::backdrop {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.mobile-menu-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--nav-height);
+  padding: 0 24px;
+  border-bottom: 1px solid var(--color-hairline);
+  flex-shrink: 0;
+}
+
+.mobile-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--color-ink);
+  border-radius: var(--radius-sm);
+  padding: 0;
+}
+.mobile-close:hover { background-color: var(--color-canvas-soft-2); }
+
+.mobile-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  flex: 1;
+}
+.mobile-nav-link {
+  display: block;
+  padding: 13px 16px;
+  color: var(--color-ink);
+  font-size: 17px;
+  font-weight: 400;
+  text-decoration: none;
+  border-radius: var(--radius-md);
+  transition: background-color 0.1s ease;
+  letter-spacing: -0.01em;
+}
+.mobile-nav-link:hover { background-color: var(--color-canvas-soft-2); }
+
+.mobile-footer {
+  padding: 20px 28px;
+  border-top: 1px solid var(--color-hairline);
+  display: flex;
+  gap: 20px;
+  flex-shrink: 0;
+}
+.mobile-social {
+  font-size: 13px;
+  color: var(--color-mute);
+  text-decoration: none;
+  transition: color 0.1s ease;
+  letter-spacing: -0.01em;
+}
+.mobile-social:hover { color: var(--color-ink); }
+</style>

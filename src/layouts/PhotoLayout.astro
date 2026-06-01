@@ -1,0 +1,68 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import { formatDate } from '@/lib/formatDate';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  location: string;
+  slug: string;
+}
+
+const { title, description, date, location, slug } = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.com';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Photos", "item": `${siteUrl}/photos` },
+    { "@type": "ListItem", "position": 3, "name": title, "item": `${siteUrl}/photos/${slug}` },
+  ],
+};
+---
+
+<BaseLayout title={title} description={description}>
+  <JsonLd slot="head" schema={breadcrumbSchema} />
+
+  <div class="photo-layout">
+    <header class="photo-header">
+      <div class="photo-meta text-caption-mono">
+        <span>{location}</span>
+        <span aria-hidden="true">·</span>
+        <time datetime={date.toISOString()}>{formatDate(date, 'short')}</time>
+      </div>
+      <h1 class="text-display-lg">{title}</h1>
+      <p class="text-body-lg photo-desc">{description}</p>
+    </header>
+
+    <slot />
+  </div>
+</BaseLayout>
+
+<style>
+.photo-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+.photo-header {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 48px;
+  max-width: 600px;
+}
+.photo-meta {
+  display: flex;
+  gap: 8px;
+  color: var(--color-mute);
+}
+.photo-desc {
+  color: var(--color-body-text);
+}
+</style>

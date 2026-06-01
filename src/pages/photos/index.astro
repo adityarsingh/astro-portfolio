@@ -1,0 +1,77 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import AlbumCard from '@/components/AlbumCard.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import { getCollection } from 'astro:content';
+
+const albums = (await getCollection('photos'))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.com';
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Photos", "item": `${siteUrl}/photos` },
+  ],
+};
+---
+
+<BaseLayout
+  title="Photos"
+  description="Travel photography from Rajasthan, Vietnam, Bramhatal Trek, Nepal, and beyond."
+>
+  <JsonLd slot="head" schema={breadcrumbSchema} />
+
+  <div class="photos-index">
+    <header class="photos-header">
+      <span class="text-caption-mono photos-eyebrow">Photography</span>
+      <h1 class="text-display-lg">Photos.</h1>
+      <p class="text-body-lg photos-desc">
+        Travels with a camera.
+      </p>
+    </header>
+
+    {albums.length === 0 ? (
+      <p class="text-body-md" style="color: var(--color-mute)">Albums coming soon.</p>
+    ) : (
+      <div class="albums-grid">
+        {albums.map(album => (
+          <AlbumCard
+            slug={album.id}
+            title={album.data.title}
+            description={album.data.description}
+            date={album.data.date}
+            location={album.data.location}
+            coverImage={album.data.coverImage}
+            coverAlt={album.data.coverAlt}
+            imageCount={album.data.images.length}
+          />
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+.photos-index {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+.photos-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.photos-eyebrow { color: var(--color-mute); }
+.photos-desc { color: var(--color-body-text); }
+.albums-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+}
+@media (max-width: 640px) { .albums-grid { grid-template-columns: 1fr; } }
+</style>

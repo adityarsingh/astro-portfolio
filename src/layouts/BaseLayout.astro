@@ -1,0 +1,58 @@
+---
+import SEO from '@/components/SEO.astro';
+import Nav from '@/components/Nav.astro';
+import Footer from '@/components/Footer.astro';
+import '@/styles/global.css';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  og?: {
+    type?: 'website' | 'article';
+    image?: string;
+    imageAlt?: string;
+  };
+  noindex?: boolean;
+}
+
+const { title, description, canonical, og, noindex } = Astro.props;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <!-- Apply theme before first paint to prevent flash -->
+    <script is:inline>
+      (function () {
+        var stored = localStorage.getItem('theme');
+        // Default is dark — only set attribute when user switched to light
+        if (stored === 'light') {
+          document.documentElement.setAttribute('data-theme', 'light');
+        }
+        // Keep browser chrome in sync
+        document.documentElement.style.colorScheme = stored === 'light' ? 'light' : 'dark';
+      })();
+    </script>
+    <meta name="color-scheme" content="dark light" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="alternate" type="application/rss+xml" title="Aditya Singh — Blog" href="/rss.xml" />
+    <SEO
+      title={title}
+      description={description}
+      canonical={canonical}
+      og={og}
+      noindex={noindex}
+    />
+    <slot name="head" />
+  </head>
+  <body>
+    <Nav />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

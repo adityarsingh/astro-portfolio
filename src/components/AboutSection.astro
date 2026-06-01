@@ -1,0 +1,207 @@
+---
+---
+
+<section class="about">
+  <div class="about-inner">
+
+    <!-- Text column -->
+    <div class="about-text">
+      <span class="text-caption-mono section-eyebrow">About me</span>
+      <h2 class="text-display-lg">A bit about me.</h2>
+
+      <div class="about-body">
+        <p class="text-body-lg about-lead">
+          I work at the intersection of content, search, and automation.
+        </p>
+        <p class="text-body-md">
+          At Akamai, I help manage web content, improve SEO and GEO, and use AI to remove
+          repetitive work from publishing and operations. I work with AEM, analytics tools,
+          and AI agents to make content not just publishable — but discoverable, localised,
+          and easier to manage.
+        </p>
+        <p class="text-body-md">
+          Outside of work, I travel with a camera. The
+          <a href="/photos" class="about-link">Photo Book</a> has some of my favourites —
+          Rajasthan, Vietnam, Nepal, and the Bramhatal trek.
+        </p>
+      </div>
+
+      <div class="about-cta">
+        <a href="mailto:adityarsingh70@gmail.com" class="btn-primary">Get in touch →</a>
+        <a href="/cv" class="btn-secondary">Download CV</a>
+      </div>
+
+      <div class="about-links">
+        <a href="https://linkedin.com/in/adityar-singh/" class="about-social" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+          LinkedIn
+        </a>
+        <a href="https://github.com/adityarsingh" class="about-social" target="_blank" rel="noopener noreferrer">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></svg>
+          GitHub
+        </a>
+      </div>
+    </div>
+
+    <!-- Photo column -->
+    <div class="about-photo-wrap" aria-hidden="true">
+      <div class="about-photo-ring">
+        <div class="about-photo-inner">
+          <!--
+            Drop any photo here — travel, portrait, or anything you like.
+            Example: <img src="/about-photo.jpg" alt="Aditya in Rajasthan" />
+            The frame is 3:4 portrait ratio and covers the full area.
+          -->
+          <div class="about-photo-placeholder">
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+              <circle cx="12" cy="13" r="4"/>
+            </svg>
+            <span>Add a photo</span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+.about {
+  background-color: var(--color-canvas);
+  padding: var(--spacing-5xl) 0;
+  border-top: 1px solid var(--color-hairline);
+}
+
+.about-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 80px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .about-inner {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about-photo-wrap { justify-self: center; }
+}
+
+/* ── Text ── */
+.about-text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 580px;
+}
+
+.section-eyebrow { color: var(--color-mute); }
+
+.about-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.about-lead { color: var(--color-ink); }
+.about-body p { color: var(--color-body-text); line-height: 1.65; }
+.about-link {
+  color: var(--color-link);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.about-cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+
+.about-links {
+  display: flex;
+  gap: 20px;
+  padding-top: 4px;
+}
+.about-social {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--color-body-text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.1s ease;
+}
+.about-social:hover { color: var(--color-ink); }
+
+/* ── Photo ── */
+.about-photo-wrap { flex-shrink: 0; }
+
+.about-photo-ring {
+  /* Portrait 3:4 frame — good for travel, street, or any photography */
+  width: 320px;
+  aspect-ratio: 3 / 4;
+  border-radius: 20px;
+  padding: 3px;
+  background: linear-gradient(
+    160deg,
+    #007cf0 0%,
+    #00dfd8 25%,
+    #7928ca 55%,
+    #ff0080 80%,
+    #f9cb28 100%
+  );
+  box-shadow:
+    0 12px 40px rgba(121, 40, 202, 0.2),
+    0 4px 12px rgba(0, 124, 240, 0.15);
+}
+
+@media (max-width: 1024px) {
+  .about-photo-ring { width: 260px; }
+}
+@media (max-width: 768px) {
+  .about-photo-ring { width: min(85vw, 300px); }
+}
+
+.about-photo-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 17px;
+  overflow: hidden;
+  background-color: var(--color-canvas-soft-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.about-photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+}
+
+.about-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  background: linear-gradient(160deg, var(--color-canvas-soft-2) 0%, var(--color-canvas-soft) 100%);
+  color: var(--color-hairline-strong);
+}
+.about-photo-placeholder span {
+  font-size: 13px;
+  font-weight: 400;
+  letter-spacing: 0.01em;
+  color: var(--color-mute);
+  user-select: none;
+}
+</style>

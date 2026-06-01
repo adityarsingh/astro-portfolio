@@ -1,0 +1,52 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import HeroSection from '@/components/HeroSection.astro';
+import SuperpowersSection from '@/components/SuperpowersSection.astro';
+import AboutSection from '@/components/AboutSection.astro';
+import BlogPreviewSection from '@/components/BlogPreviewSection.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3);
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.com';
+
+const personSchema = {
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "Aditya Raj Singh",
+  "url": siteUrl,
+  "email": "adityarsingh70@gmail.com",
+  "sameAs": [
+    "https://github.com/adityarsingh",
+    "https://linkedin.com/in/adityar-singh/",
+  ],
+  "jobTitle": "Content & Automation Engineer",
+  "description": "I work at the intersection of content, search, and automation. At Akamai, I help manage web content, improve SEO and GEO, and use AI to remove repetitive work from publishing and operations.",
+  "worksFor": {
+    "@type": "Organization",
+    "name": "Akamai",
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+  ],
+};
+---
+
+<BaseLayout
+  title="Aditya Singh"
+  description="I work at the intersection of content, search, and automation. At Akamai, I help manage web content, improve SEO and GEO, and use AI to remove repetitive work from publishing and operations."
+>
+  <JsonLd slot="head" schema={[personSchema, breadcrumbSchema]} />
+  <HeroSection />
+  <SuperpowersSection />
+  <AboutSection />
+  {posts.length > 0 && <BlogPreviewSection posts={posts} />}
+</BaseLayout>

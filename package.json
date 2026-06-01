@@ -1,0 +1,29 @@
+{
+  "name": "personal-website",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "astro": "^5.1.0",
+    "@astrojs/mdx": "^4.0.0",
+    "@astrojs/sitemap": "^3.2.0",
+    "@astrojs/rss": "^4.0.0",
+    "astro-seo": "^0.8.0",
+    "tailwindcss": "^4.0.0",
+    "@tailwindcss/vite": "^4.0.0",
+    "@tailwindcss/typography": "^0.5.0",
+    "@fontsource-variable/geist": "^5.0.0",
+    "@fontsource-variable/geist-mono": "^5.0.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.0.0",
+    "sharp": "^0.33.0",
+    "fast-xml-parser": "^4.5.0",
+    "turndown": "^7.2.0"
+  }
+}

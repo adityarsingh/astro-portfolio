@@ -1,0 +1,68 @@
+---
+interface Props {
+  currentPage: number;
+  totalPages: number;
+  baseUrl: string;
+}
+const { currentPage, totalPages, baseUrl } = Astro.props;
+
+function pageUrl(n: number) {
+  return n === 1 ? baseUrl : `${baseUrl}/${n}`;
+}
+---
+
+{totalPages > 1 && (
+  <nav aria-label="Pagination" class="pagination">
+    {currentPage > 1 ? (
+      <a href={pageUrl(currentPage - 1)} class="pagination-btn" aria-label="Previous page">
+        ←
+      </a>
+    ) : (
+      <span class="pagination-btn disabled" aria-disabled="true">←</span>
+    )}
+
+    <span class="pagination-info text-body-sm">
+      Page {currentPage} of {totalPages}
+    </span>
+
+    {currentPage < totalPages ? (
+      <a href={pageUrl(currentPage + 1)} class="pagination-btn" aria-label="Next page">
+        →
+      </a>
+    ) : (
+      <span class="pagination-btn disabled" aria-disabled="true">→</span>
+    )}
+  </nav>
+)}
+
+<style>
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 48px;
+}
+.pagination-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: 9999px;
+  font-size: 14px;
+  color: var(--color-ink);
+  background-color: var(--color-canvas);
+  box-shadow: var(--shadow-2);
+  text-decoration: none;
+  transition: box-shadow 0.15s ease;
+}
+.pagination-btn:hover:not(.disabled) { box-shadow: var(--shadow-3); }
+.pagination-btn.disabled {
+  color: var(--color-mute);
+  cursor: default;
+}
+.pagination-info {
+  color: var(--color-mute);
+}
+</style>

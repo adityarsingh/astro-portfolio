@@ -1,0 +1,142 @@
+---
+---
+
+<dialog id="lightbox" aria-label="Photo lightbox" aria-modal="true">
+  <button id="lb-close" class="lb-btn lb-close" aria-label="Close lightbox">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <line x1="4" y1="4" x2="16" y2="16"/>
+      <line x1="16" y1="4" x2="4" y2="16"/>
+    </svg>
+  </button>
+  <button id="lb-prev" class="lb-btn lb-nav lb-prev" aria-label="Previous photo">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <polyline points="13 4 7 10 13 16"/>
+    </svg>
+  </button>
+  <figure class="lb-figure">
+    <img id="lb-img" src="" alt="" loading="eager" />
+    <figcaption id="lb-caption" class="lb-caption text-caption-mono"></figcaption>
+  </figure>
+  <button id="lb-next" class="lb-btn lb-nav lb-next" aria-label="Next photo">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
+      <polyline points="7 4 13 10 7 16"/>
+    </svg>
+  </button>
+  <div id="lb-counter" class="lb-counter text-caption-mono"></div>
+</dialog>
+
+<script>
+  interface LbImage { src: string; alt: string; caption?: string; }
+
+  const dialog = document.getElementById('lightbox') as HTMLDialogElement | null;
+  const img     = document.getElementById('lb-img') as HTMLImageElement | null;
+  const caption = document.getElementById('lb-caption');
+  const counter = document.getElementById('lb-counter');
+
+  let images: LbImage[] = [];
+  let current = 0;
+
+  function show(index: number) {
+    current = (index + images.length) % images.length;
+    const item = images[current];
+    if (img) { img.src = item.src; img.alt = item.alt; }
+    if (caption) caption.textContent = item.caption ?? '';
+    if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+  }
+
+  document.addEventListener('click', (e) => {
+    const el = (e.target as HTMLElement).closest('[data-lightbox-index]') as HTMLElement | null;
+    if (!el) return;
+    e.preventDefault();
+    const grid = el.closest('[data-lightbox-images]') as HTMLElement | null;
+    images = grid ? JSON.parse(grid.dataset.lightboxImages ?? '[]') : [];
+    show(parseInt(el.dataset.lightboxIndex ?? '0', 10));
+    dialog?.showModal();
+  });
+
+  document.getElementById('lb-close')?.addEventListener('click', () => dialog?.close());
+  document.getElementById('lb-prev')?.addEventListener('click',  () => show(current - 1));
+  document.getElementById('lb-next')?.addEventListener('click',  () => show(current + 1));
+
+  dialog?.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
+
+  document.addEventListener('keydown', (e) => {
+    if (!dialog?.open) return;
+    if (e.key === 'ArrowLeft')  show(current - 1);
+    if (e.key === 'ArrowRight') show(current + 1);
+  });
+</script>
+
+<style>
+#lightbox {
+  position: fixed;
+  inset: 0;
+  margin: auto;
+  max-width: min(92vw, 1100px);
+  max-height: 92vh;
+  width: max-content;
+  height: max-content;
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xs);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  box-shadow: var(--shadow-5);
+}
+#lightbox::backdrop {
+  background-color: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+#lightbox:not([open]) { display: none; }
+
+.lb-figure {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+#lb-img {
+  max-height: calc(92vh - 80px);
+  max-width: calc(92vw - 120px);
+  width: auto;
+  height: auto;
+  display: block;
+  border-radius: var(--radius-md);
+  object-fit: contain;
+}
+.lb-caption {
+  color: rgba(255,255,255,0.6);
+  text-align: center;
+  min-height: 16px;
+}
+.lb-counter {
+  position: absolute;
+  bottom: 10px;
+  right: 14px;
+  color: rgba(255,255,255,0.5);
+}
+.lb-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: rgba(255,255,255,0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-sm);
+  padding: 6px;
+  transition: color 0.1s ease, background-color 0.1s ease;
+}
+.lb-btn:hover { color: #fff; background-color: rgba(255,255,255,0.1); }
+.lb-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.lb-nav {
+  flex-shrink: 0;
+}
+</style>

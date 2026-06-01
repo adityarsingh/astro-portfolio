@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "dokploy-mcp": {
+      "command": "npx",
+      "args": ["-y", "@dokploy/mcp"],
+      "env": {
+        "DOKPLOY_URL": "https://cp.nologs.in",
+        "DOKPLOY_API_KEY": "nologsmzGqtsDSUigQlKuGjPeIrMvtgCXUNudtWxzzddnPIXJBKdiDkzlpegVOouhKUFzv"
+      }
+    }
+  }
+}

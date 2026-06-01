@@ -1,0 +1,178 @@
+---
+import MeshGradient from './MeshGradient.astro';
+---
+
+<section class="hero">
+  <MeshGradient opacity={0.13} />
+
+  <div class="hero-inner">
+    <!-- Text column -->
+    <div class="hero-text">
+      <span class="hero-eyebrow text-caption-mono">Content · Search · Automation</span>
+      <h1 class="hero-headline">
+        Hi, I'm Aditya!&nbsp;<span aria-label="waving hand">👋</span>
+      </h1>
+      <p class="hero-bio text-body-lg">
+        I work at the intersection of content, search, and automation. At Akamai, I help manage
+        web content, improve SEO and GEO, and use AI to remove repetitive work from publishing
+        and operations.
+      </p>
+      <div class="hero-cta">
+        <a href="mailto:adityarsingh70@gmail.com" class="btn-primary">Let's connect →</a>
+        <a href="/cv" class="btn-secondary">Download CV</a>
+      </div>
+    </div>
+
+    <!-- Photo column -->
+    <div class="hero-photo-wrap" aria-hidden="true">
+      <div class="hero-photo-ring">
+        <div class="hero-photo-inner">
+          <!--
+            Drop your photo here:
+            <img src="/profile.jpg" alt="Aditya Singh" />
+            Until then, the initials placeholder shows.
+          -->
+          <div class="hero-photo-placeholder">
+            <span>AR</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+.hero {
+  position: relative;
+  overflow: hidden;
+  background-color: var(--color-canvas);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 80px 24px 88px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 64px;
+  align-items: center;
+}
+
+@media (max-width: 768px) {
+  .hero-inner {
+    grid-template-columns: 1fr;
+    padding: 56px 24px 64px;
+    gap: 40px;
+  }
+  /* Photo above text on mobile */
+  .hero-photo-wrap { order: -1; justify-self: center; }
+}
+
+/* ── Text ── */
+.hero-text {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  max-width: 560px;
+}
+
+.hero-eyebrow {
+  color: var(--color-mute);
+  display: block;
+}
+
+.hero-headline {
+  font-size: 52px;
+  font-weight: 600;
+  line-height: 1.05;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+}
+
+@media (max-width: 640px) {
+  .hero-headline { font-size: 38px; }
+}
+
+.hero-bio {
+  color: var(--color-body-text);
+  line-height: 1.65;
+  max-width: 480px;
+}
+
+.hero-cta {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  padding-top: 4px;
+}
+
+/* ── Photo ── */
+.hero-photo-wrap {
+  flex-shrink: 0;
+}
+
+/* Gradient ring via layered background + padding trick */
+.hero-photo-ring {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  padding: 3px;
+  background: linear-gradient(
+    135deg,
+    #007cf0 0%,
+    #00dfd8 25%,
+    #7928ca 55%,
+    #ff0080 80%,
+    #f9cb28 100%
+  );
+  box-shadow: 0 8px 32px rgba(121, 40, 202, 0.2), 0 2px 8px rgba(0, 124, 240, 0.15);
+}
+
+@media (max-width: 768px) {
+  .hero-photo-ring { width: 160px; height: 160px; }
+}
+
+.hero-photo-inner {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: var(--color-canvas-soft-2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-photo-inner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Placeholder shown when no photo is set */
+.hero-photo-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--color-canvas-soft-2), var(--color-canvas-soft));
+}
+
+.hero-photo-placeholder span {
+  font-family: var(--font-mono);
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--color-hairline-strong);
+  user-select: none;
+}
+
+@media (max-width: 768px) {
+  .hero-photo-placeholder span { font-size: 22px; }
+}
+</style>

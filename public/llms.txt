@@ -1,0 +1,23 @@
+# Aditya Raj Singh — Personal Website
+
+> I work at the intersection of content, search, and automation. At Akamai, I help manage web content, improve SEO and GEO, and use AI to remove repetitive work from publishing and operations.
+
+## Pages
+
+- /: Personal homepage with hero, superpowers, and about sections
+- /blog: Blog archive — writing on content, SEO, AI automation, and digital marketing
+- /photos: Travel photography — Rajasthan, Vietnam, Bramhatal Trek, Nepal
+- /cv: Curriculum vitae (PDF download)
+
+## Skills
+
+- AI Automation: custom GPT agents, automated workflows, AI-powered publishing
+- Website Management: large-scale CMS (AEM), performance, security
+- Digital Marketing: analytics, campaign strategy, brand storytelling
+- SEO / GEO: search visibility, LLM discoverability, local search
+
+## Contact
+
+Email: adityarsingh70@gmail.com
+LinkedIn: https://linkedin.com/in/adityar-singh/
+GitHub: https://github.com/adityarsingh

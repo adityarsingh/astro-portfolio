@@ -1,0 +1,379 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+@import "@fontsource-variable/geist";
+@import "@fontsource-variable/geist-mono";
+
+/* ─────────────────────────────────────────────────────────────────────────
+   DARK MODE TOKENS  (default — no attribute required)
+   Light mode overrides live in  html[data-theme="light"]  below.
+───────────────────────────────────────────────────────────────────────── */
+
+@theme {
+  /* ── Adaptive color tokens ── */
+  /* These are the DARK mode values. Light overrides are below. */
+  --color-primary:         #efefef;   /* Light CTA in dark mode          */
+  --color-on-primary:      #0a0a0a;   /* Dark text on light CTA          */
+  --color-ink:             #ededed;   /* Near-white body text            */
+  --color-body-text:       #999999;   /* Secondary text                  */
+  --color-mute:            #555555;   /* Disabled / placeholder          */
+  --color-hairline:        #282828;   /* Subtle borders                  */
+  --color-hairline-strong: #404040;   /* Stronger borders                */
+  --color-canvas:          #0a0a0a;   /* Page / card background          */
+  --color-canvas-soft:     #111111;   /* Slightly elevated surface       */
+  --color-canvas-soft-2:   #1c1c1c;   /* Hover / active state            */
+  --color-link:            #5aabff;   /* Brighter blue for dark bg       */
+  --color-link-deep:       #7fbfff;
+  --color-link-bg-soft:    #0f2240;
+  --color-error:           #ff4d4d;
+  --color-error-soft:      #2d0f0f;
+  --color-error-deep:      #ff7070;
+  --color-warning:         #f5a623;
+  --color-warning-soft:    #2d1e06;
+  --color-warning-deep:    #f7c05e;
+  --color-violet:          #a855f7;
+  --color-violet-soft:     #1f0a38;
+  --color-violet-deep:     #c084fc;
+  --color-cyan:            #22d3ee;
+  --color-cyan-soft:       #042838;
+  --color-cyan-deep:       #67e8f9;
+  --color-highlight-pink:  #ff0080;
+
+  /* ── Stable tokens (same in both modes) ── */
+  --font-sans: "Geist Variable", Inter, system-ui, -apple-system, sans-serif;
+  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+
+  --spacing-xxs:     4px;
+  --spacing-xs:      8px;
+  --spacing-sm:      12px;
+  --spacing-md:      16px;
+  --spacing-lg:      24px;
+  --spacing-xl:      32px;
+  --spacing-2xl:     40px;
+  --spacing-3xl:     48px;
+  --spacing-4xl:     64px;
+  --spacing-5xl:     96px;
+  --spacing-6xl:     128px;
+  --spacing-section: 192px;
+
+  --radius-xs:      4px;
+  --radius-sm:      6px;
+  --radius-md:      8px;
+  --radius-lg:      12px;
+  --radius-xl:      16px;
+  --radius-pill-sm: 64px;
+  --radius-pill:    100px;
+  --radius-full:    9999px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   :root  — non-theme CSS vars (shadows, gradients, etc.)
+   These are the DARK mode values.
+───────────────────────────────────────────────────────────────────────── */
+
+:root {
+  /* Dark-mode shadows */
+  --shadow-1: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  --shadow-2: 0 1px 2px  rgba(0, 0, 0, 0.7),
+              0 2px 4px  rgba(0, 0, 0, 0.5),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  --shadow-3: 0 2px 4px  rgba(0, 0, 0, 0.7),
+              0 8px 16px rgba(0, 0, 0, 0.5),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  --shadow-4: 0 4px 8px  rgba(0, 0, 0, 0.8),
+              0 12px 24px rgba(0, 0, 0, 0.6),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  --shadow-5: 0 1px 2px  rgba(0, 0, 0, 0.8),
+              0 8px 20px rgba(0, 0, 0, 0.7),
+              0 24px 40px rgba(0, 0, 0, 0.6),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+
+  /* Nav background — frosted glass, dark mode */
+  --nav-bg: rgba(10, 10, 10, 0.85);
+
+  /* Code block — stays dark in both modes */
+  --color-code-bg:   #161616;
+  --color-code-text: #c9d1d9;
+
+  /* Brand gradients — unchanged in both modes */
+  --gradient-develop: linear-gradient(135deg, #007cf0, #00dfd8);
+  --gradient-preview: linear-gradient(135deg, #7928ca, #ff0080);
+  --gradient-ship:    linear-gradient(135deg, #ff4d4d, #f9cb28);
+
+  --nav-height: 64px;
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   LIGHT MODE  — applied when  <html data-theme="light">
+───────────────────────────────────────────────────────────────────────── */
+
+html[data-theme="light"] {
+  /* Adaptive color overrides */
+  --color-primary:         #171717;
+  --color-on-primary:      #ffffff;
+  --color-ink:             #171717;
+  --color-body-text:       #4d4d4d;
+  --color-mute:            #888888;
+  --color-hairline:        #ebebeb;
+  --color-hairline-strong: #a1a1a1;
+  --color-canvas:          #ffffff;
+  --color-canvas-soft:     #fafafa;
+  --color-canvas-soft-2:   #f5f5f5;
+  --color-link:            #0070f3;
+  --color-link-deep:       #0761d1;
+  --color-link-bg-soft:    #d3e5ff;
+  --color-error:           #ee0000;
+  --color-error-soft:      #f7d4d6;
+  --color-error-deep:      #c50000;
+  --color-warning:         #f5a623;
+  --color-warning-soft:    #ffefcf;
+  --color-warning-deep:    #ab570a;
+  --color-violet:          #7928ca;
+  --color-violet-soft:     #d8ccf1;
+  --color-violet-deep:     #4c2889;
+  --color-cyan:            #50e3c2;
+  --color-cyan-soft:       #aaffec;
+  --color-cyan-deep:       #29bc9b;
+  --color-highlight-pink:  #ff0080;
+
+  /* Nav background — light mode */
+  --nav-bg: rgba(255, 255, 255, 0.9);
+
+  /* Light-mode shadows: subtle blacks + inset hairline */
+  --shadow-1: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-2: 0px 1px 1px rgba(0, 0, 0, 0.02),
+              0px 2px 2px rgba(0, 0, 0, 0.04),
+              inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-3: 0px 2px 2px  rgba(0, 0, 0, 0.04),
+              0px 8px 8px  -8px rgba(0, 0, 0, 0.04),
+              inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-4: 0px 2px 2px  rgba(0, 0, 0, 0.04),
+              0px 8px 16px -4px rgba(0, 0, 0, 0.04),
+              inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --shadow-5: 0px 1px 1px  rgba(0, 0, 0, 0.02),
+              0px 8px 16px -4px rgba(0, 0, 0, 0.04),
+              0px 24px 32px -8px rgba(0, 0, 0, 0.06),
+              inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
+/* ─────────────────────────────────────────────────────────────────────────
+   Base Styles
+───────────────────────────────────────────────────────────────────────── */
+
+::selection {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+html {
+  background-color: var(--color-canvas-soft);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* Smooth theme transition */
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+main { flex: 1; }
+
+/*
+  Theme-switch transitions — only animate during the brief window when
+  the user clicks the toggle, not on every hover. The JS sets
+  --theme-transition to a non-zero duration and removes it 300ms later.
+*/
+:root { --theme-transition: 0s; }
+
+html.theme-switching,
+html.theme-switching *,
+html.theme-switching *::before,
+html.theme-switching *::after {
+  transition:
+    background-color var(--theme-transition) ease,
+    border-color     var(--theme-transition) ease,
+    color            var(--theme-transition) ease,
+    box-shadow       var(--theme-transition) ease !important;
+}
+
+/* ─── Typography Utilities ────────────────────────────────────────────── */
+
+.text-display-xl {
+  font-size: 48px;
+  font-weight: 600;
+  line-height: 48px;
+  letter-spacing: -0.05em;
+}
+.text-display-lg {
+  font-size: 32px;
+  font-weight: 600;
+  line-height: 40px;
+  letter-spacing: -0.04em;
+}
+.text-display-md {
+  font-size: 24px;
+  font-weight: 600;
+  line-height: 32px;
+  letter-spacing: -0.04em;
+}
+.text-display-sm {
+  font-size: 20px;
+  font-weight: 600;
+  line-height: 28px;
+  letter-spacing: -0.03em;
+}
+.text-body-lg  { font-size: 18px; font-weight: 400; line-height: 28px; }
+.text-body-md  { font-size: 16px; font-weight: 400; line-height: 24px; }
+.text-body-sm  { font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: -0.02em; }
+.text-caption  { font-size: 12px; font-weight: 400; line-height: 16px; }
+.text-caption-mono {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 400;
+  line-height: 16px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.text-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 20px;
+}
+
+/* ─── Component Classes ───────────────────────────────────────────────── */
+
+@layer components {
+  .btn-primary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-pill);
+    padding: 0 var(--spacing-sm);
+    height: 44px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-decoration: none;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-primary:hover { opacity: 0.85; }
+
+  .btn-secondary {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    background-color: var(--color-canvas-soft-2);
+    color: var(--color-ink);
+    border-radius: var(--radius-pill);
+    padding: 0 var(--spacing-sm);
+    height: 44px;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    text-decoration: none;
+    box-shadow: var(--shadow-2);
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-secondary:hover { box-shadow: var(--shadow-3); }
+
+  .btn-nav {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+    border-radius: var(--radius-sm);
+    padding: 0 12px;
+    height: 30px;
+    font-size: 13px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    border: none;
+    cursor: pointer;
+  }
+  .btn-nav:hover { opacity: 0.8; }
+
+  .card {
+    background-color: var(--color-canvas);
+    border-radius: var(--radius-md);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-2);
+  }
+  .card:hover { box-shadow: var(--shadow-3); }
+
+  .tag-pill {
+    display: inline-flex;
+    align-items: center;
+    background-color: var(--color-canvas-soft-2);
+    color: var(--color-body-text);
+    border-radius: var(--radius-full);
+    padding: 2px var(--spacing-xs);
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 16px;
+    text-decoration: none;
+  }
+  .tag-pill:hover { background-color: var(--color-hairline); }
+  .tag-pill.active {
+    background-color: var(--color-primary);
+    color: var(--color-on-primary);
+  }
+}
+
+/* ─── Prose (blog post) overrides ────────────────────────────────────── */
+
+.prose {
+  --tw-prose-body:          var(--color-body-text);
+  --tw-prose-headings:      var(--color-ink);
+  --tw-prose-links:         var(--color-link);
+  --tw-prose-bold:          var(--color-ink);
+  --tw-prose-counters:      var(--color-mute);
+  --tw-prose-bullets:       var(--color-mute);
+  --tw-prose-hr:            var(--color-hairline);
+  --tw-prose-quotes:        var(--color-ink);
+  --tw-prose-quote-borders: var(--color-hairline);
+  --tw-prose-captions:      var(--color-mute);
+  --tw-prose-code:          var(--color-ink);
+  --tw-prose-pre-bg:        var(--color-code-bg);
+  --tw-prose-pre-code:      var(--color-code-text);
+  --tw-prose-th-borders:    var(--color-hairline);
+  --tw-prose-td-borders:    var(--color-hairline);
+  max-width: 68ch;
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  letter-spacing: -0.03em;
+}
+
+.prose a {
+  text-underline-offset: 3px;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+  background-color: var(--color-canvas-soft-2);
+  color: var(--color-ink);
+  border-radius: var(--radius-xs);
+  padding: 0.1em 0.35em;
+}
+
+.prose pre code {
+  background-color: transparent;
+  color: var(--color-code-text);
+  padding: 0;
+}

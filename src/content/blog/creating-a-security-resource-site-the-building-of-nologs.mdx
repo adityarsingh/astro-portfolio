@@ -1,0 +1,105 @@
+---
+title: "Creating a Security Resource Site: The Building of NoLogs"
+description: "How I built NoLogs.in — a curated, static privacy-tools directory using Hugo, Cloudflare Pages, and manual editorial curation."
+date: 2026-01-02
+tags: ["privacy", "side-project", "web-dev"]
+wpId: 669
+canonical: "https://adityarsingh.in/creating-a-security-resource-site-the-building-of-nologs/"
+---
+
+If you stare at the modern web long enough, you start to feel a little tired. It's loud. It's anxious. It's desperate for your attention.
+
+Most software directories feel like a bazaar where everyone is shouting. You search for a simple VPN or a secure note-taking app, and you're immediately hit with "Top 10" lists (that are actually just ads), pop-ups begging for your email, and affiliate links disguised as advice.
+
+I wasn't trying to fix the whole internet. I just wanted to build a sanctuary from it.
+
+I wanted a library, not a marketplace. A place that felt like stepping into a quiet, temperature-controlled server room rather than a crowded mall.
+
+So, as a personal experiment, I built **[NoLogs.in](https://nologs.in)**.
+
+It is a curated directory of privacy tools, yes. But for me, it was really a learning project — a challenge to see if I could build a "dumb," simple, static site that was actually useful.
+
+Here is the blueprint behind the build, and what I learned along the way.
+
+## The Motivation: Scratching My Own Itch
+
+When I started this, I didn't have a grand philosophy in mind. I just had a friction point.
+
+I consider myself "privacy-aware." I know I should de-Google my life. But even I freeze up when I see fifty different Linux distros or twelve different encrypted email providers. The sheer volume of choice is paralyzing.
+
+I realized that what I wanted wasn't a debate; I wanted a map.
+
+I built NoLogs for the "Overwhelmed Privacy-Aware" (which is mostly just me). I wanted to organize my own digital life and share the notes. I stopped trying to optimize for "clicks" and started optimizing for "calm."
+
+## The Tech Stack: Falling in Love with "Boring"
+
+As a developer, we often get distracted by the shiny new toys — complex frameworks, dynamic databases, AI integrations.
+
+For this project, I went the other way. I wanted to see how much I could strip away. I wanted to master the "Static" approach.
+
+### 1. The Engine: Hugo
+
+I decided to learn **Hugo**. Unlike a standard dynamic site (like WordPress) that cooks the meal every time a guest orders it by building the page on the server, Hugo cooks everything in advance.
+
+It builds the entire site *once*, locally. When you visit NoLogs.in, you aren't waiting for a server to "think" or query a database. You are just downloading a simple HTML file. It's instant. It's lightweight.
+
+It was a reminder that sometimes, the "boring" way is actually the elegant way.
+
+### 2. The Structure: Leaf Bundles
+
+Organizing the data was a fun engineering puzzle. I didn't want a messy spreadsheet or a fragile database.
+
+I utilized Hugo's **"Leaf Bundle"** structure. It's a way of organizing content where every tool — whether it's ProtonVPN or Signal — lives in its own self-contained folder. The text (`index.md`), the logo, and the metadata all sit together in one little package.
+
+- If I want to add a tool? I copy a folder.
+- If I want to delete a tool? I delete the folder.
+
+It felt less like database management and more like modular engineering. It keeps my repository spotless and ensures that assets never get lost.
+
+### 3. Hosting: Cloudflare Pages
+
+Since the site is just a collection of files, I didn't need a traditional server. I hosted it on **Cloudflare Pages**.
+
+I chose this to get hands-on experience with edge networks. By pushing the site to the edge, it loads instantly from a location close to you, wherever you are. Plus, it puts an enterprise-grade security layer in front of my little hobby project by default. Fast, global, and rock solid.
+
+## The Design: Digital Brutalism
+
+I looked at this project as a UI experiment. I wanted to move away from the standard "blog" layout and create something that felt raw and functional — like a tool you'd find on an old-school command line.
+
+I used the **Terminal theme** for Hugo, which leans heavily into a retro, monospaced aesthetic.
+
+- **The Vibe:** It uses a high-contrast, monospaced font that mimics the feeling of typing into a console. It tells the user immediately: *This is a utility, not a magazine.*
+- **No Distractions:** There are no hero images, no parallax scrolling, and no animations. Just text and code.
+- **The Customization:** I tweaked the CSS to create a simple grid layout. It forces the content to stand on its own. You can scan the list and find what you need without wading through paragraphs of fluff.
+
+Design is communication. By choosing a terminal aesthetic, I'm signaling that the value here is in the data, not the decoration.
+
+## The Editorial Model: Why I Didn't Use AI
+
+In the age of AI, the temptation was to write a script that scrapes the web, summarizes 500 tools, and publishes them automatically. I could have finished the site in an afternoon.
+
+But that felt like cheating.
+
+I stuck to a manual **Editorial Curation Model**.
+
+- I decide what is listed.
+- I write the descriptions.
+- I check the links.
+
+If a tool has a murky privacy policy, I don't list it. If a tool sells out to an ad-tech company, I delete the folder.
+
+This human bottleneck is a feature, not a bug. It means that when you see something on the site, a human being (me) has actually looked at it and said, *"Yes, this is valid."* In a world of generated sludge, hand-curation feels like the ultimate premium product.
+
+## Why This Matters
+
+You might ask, "Why go to all this trouble for a simple directory?"
+
+Because building simple things is the best way to sharpen your fundamentals.
+
+Building NoLogs was a chance to practice "calm" coding. It was a project where I could build a useful, beautiful thing that respects the user, without any corporate metrics hanging over my head.
+
+We can treat our digital lives as something to be designed, not just endured.
+
+I invite you to take a look. There are no cookies to accept. There is no newsletter pop-up to close. It's just a quiet place where you might find a tool to reclaim a little bit of your own digital freedom.
+
+And really, isn't that what we're all looking for?

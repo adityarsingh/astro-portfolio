@@ -1,0 +1,63 @@
+---
+interface Image {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+  caption?: string;
+}
+
+interface Props {
+  images: Image[];
+}
+
+const { images } = Astro.props;
+---
+
+<div
+  class="photo-grid"
+  data-lightbox-images={JSON.stringify(images)}
+  id="photo-grid"
+>
+  {images.map((img, i) => (
+    <a
+      href={img.src}
+      class="photo-item"
+      data-lightbox-index={i}
+      aria-label={img.alt}
+    >
+      <img
+        src={img.src}
+        alt={img.alt}
+        loading={i < 6 ? 'eager' : 'lazy'}
+        decoding="async"
+      />
+    </a>
+  ))}
+</div>
+
+<style>
+.photo-grid {
+  columns: 2;
+  column-gap: 8px;
+}
+@media (min-width: 600px) { .photo-grid { columns: 3; } }
+@media (min-width: 960px) { .photo-grid { columns: 4; } }
+
+.photo-item {
+  display: block;
+  break-inside: avoid;
+  margin-bottom: 8px;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  cursor: pointer;
+  background-color: var(--color-canvas-soft-2);
+}
+.photo-item img {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: opacity 0.2s ease;
+}
+.photo-item:hover img { opacity: 0.92; }
+</style>

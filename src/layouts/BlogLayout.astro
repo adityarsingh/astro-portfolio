@@ -1,0 +1,145 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import TagPill from '@/components/TagPill.astro';
+import { formatDate } from '@/lib/formatDate';
+import { readingTime } from '@/lib/readingTime';
+
+interface Props {
+  title: string;
+  description: string;
+  date: Date;
+  updated?: Date;
+  tags: string[];
+  coverImage?: string;
+  coverAlt?: string;
+  slug: string;
+  rawContent: string;
+}
+
+const { title, description, date, updated, tags, coverImage, coverAlt, slug, rawContent } = Astro.props;
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.com';
+const pageUrl = `${siteUrl}/blog/${slug}`;
+const mins = readingTime(rawContent);
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": date.toISOString(),
+  "dateModified": (updated ?? date).toISOString(),
+  "url": pageUrl,
+  "image": coverImage ? `${siteUrl}${coverImage}` : `${siteUrl}/og/default.png`,
+  "author": {
+    "@type": "Person",
+    "name": "Aditya Singh",
+    "url": siteUrl,
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Aditya Singh",
+    "url": siteUrl,
+  },
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog` },
+    { "@type": "ListItem", "position": 3, "name": title, "item": pageUrl },
+  ],
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  og={{ type: 'article', image: coverImage, imageAlt: coverAlt }}
+  canonical={pageUrl}
+>
+  <JsonLd slot="head" schema={[articleSchema, breadcrumbSchema]} />
+
+  <div class="blog-post-layout">
+    <article class="blog-post-article">
+      <!-- Post header -->
+      <header class="post-header">
+        <div class="post-meta">
+          <time datetime={date.toISOString()} class="text-caption-mono">
+            {formatDate(date, 'long')}
+          </time>
+          <span class="post-meta-sep" aria-hidden="true">·</span>
+          <span class="text-caption-mono">{mins} min read</span>
+        </div>
+        <h1 class="text-display-lg post-title">{title}</h1>
+        <p class="text-body-lg post-description">{description}</p>
+        {tags.length > 0 && (
+          <div class="post-tags">
+            {tags.map(tag => <TagPill tag={tag} />)}
+          </div>
+        )}
+      </header>
+
+      {coverImage && (
+        <div class="post-cover">
+          <img src={coverImage} alt={coverAlt ?? title} loading="eager" />
+        </div>
+      )}
+
+      <div class="prose">
+        <slot />
+      </div>
+    </article>
+  </div>
+</BaseLayout>
+
+<style>
+.blog-post-layout {
+  max-width: 768px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+.blog-post-article {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+}
+.post-header {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.post-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-mute);
+}
+.post-meta-sep {
+  color: var(--color-hairline-strong);
+}
+.post-title {
+  color: var(--color-ink);
+}
+.post-description {
+  color: var(--color-body-text);
+}
+.post-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.post-cover {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--shadow-3);
+}
+.post-cover img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+</style>

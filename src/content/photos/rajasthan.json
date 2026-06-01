@@ -1,0 +1,82 @@
+{
+  "title": "Rajasthan",
+  "description": "Colours, forts, and the desert — a week through the land of maharajas.",
+  "date": "2025-11-01",
+  "coverImage": "/photos/rajasthan/IMG_3365-scaled.jpg",
+  "coverAlt": "Vibrant street scene in Rajasthan",
+  "location": "Rajasthan, India",
+  "images": [
+    {
+      "src": "/photos/rajasthan/IMG_2968-scaled.jpg",
+      "alt": "Landscape of the Rajasthan countryside",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3197-scaled.jpg",
+      "alt": "Architecture and colours of Rajasthan",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3218-scaled.jpg",
+      "alt": "Desert landscape at dusk",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3236-scaled.jpg",
+      "alt": "Traditional Rajasthani scene",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3239-scaled.jpg",
+      "alt": "Fort walls glowing in the afternoon sun",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3261-scaled.jpg",
+      "alt": "Ancient step-well with intricate stonework",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3365-scaled.jpg",
+      "alt": "Vibrant market street in Rajasthan",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3397-scaled.jpg",
+      "alt": "Palace courtyard bathed in golden light",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3411-scaled.jpg",
+      "alt": "Silhouette of a Rajasthani fort at sunset",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3453-scaled.jpg",
+      "alt": "Sand dunes stretching to the horizon",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3454-scaled.jpg",
+      "alt": "Camel at rest in the Thar Desert",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/rajasthan/IMG_3456-scaled.jpg",
+      "alt": "Sunset over the Rajasthan desert",
+      "width": 4032,
+      "height": 3024
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BlogLayout from '@/layouts/BlogLayout.astro';
+import { getCollection } from 'astro:content';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  return posts.map(post => ({
+    params: { slug: post.slug },
+    props: { post },
+  }));
+};
+
+const { post } = Astro.props;
+const { Content, remarkPluginFrontmatter } = await post.render();
+
+const rawContent = post.body ?? '';
+---
+
+<BlogLayout
+  title={post.data.title}
+  description={post.data.description}
+  date={post.data.date}
+  updated={post.data.updated}
+  tags={post.data.tags}
+  coverImage={post.data.coverImage}
+  coverAlt={post.data.coverAlt}
+  slug={post.slug}
+  rawContent={rawContent}
+>
+  <Content />
+</BlogLayout>

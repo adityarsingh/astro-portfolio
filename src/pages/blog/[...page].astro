@@ -1,0 +1,152 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import BlogCard from '@/components/BlogCard.astro';
+import Pagination from '@/components/Pagination.astro';
+import JsonLd from '@/components/JsonLd.astro';
+import { getCollection } from 'astro:content';
+import { getSortedTags } from '@/lib/getTagCounts';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return paginate(posts, { pageSize: 8 });
+};
+
+const { page } = Astro.props;
+const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+
+const sortedTags = getSortedTags(allPosts).slice(0, 10);
+
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.com';
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home", "item": siteUrl },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": `${siteUrl}/blog` },
+  ],
+};
+---
+
+<BaseLayout
+  title={`Blog${page.currentPage > 1 ? ` — Page ${page.currentPage}` : ''}`}
+  description="Writing on software engineering, infrastructure, systems design, and occasional personal essays."
+  noindex={page.currentPage > 1}
+>
+  <JsonLd slot="head" schema={breadcrumbSchema} />
+
+  <div class="blog-archive">
+    <header class="archive-header">
+      <span class="text-caption-mono archive-eyebrow">Writing</span>
+      <h1 class="text-display-lg">Blog.</h1>
+      <p class="text-body-lg archive-desc">
+        Notes on software, infrastructure, and occasionally life.
+      </p>
+    </header>
+
+    {sortedTags.length > 0 && (
+      <div class="tag-filter" id="tag-filter" role="navigation" aria-label="Filter by tag">
+        <button class="tag-pill active" data-tag="all" id="tag-all">All</button>
+        {sortedTags.map(([tag]) => (
+          <button class="tag-pill" data-tag={tag}>{tag}</button>
+        ))}
+      </div>
+    )}
+
+    <div class="posts-grid" id="posts-grid">
+      {page.data.map(post => (
+        <div class="post-item" data-tags={JSON.stringify(post.data.tags)}>
+          <BlogCard
+            title={post.data.title}
+            description={post.data.description}
+            date={post.data.date}
+            slug={post.slug}
+            tags={post.data.tags}
+          />
+        </div>
+      ))}
+    </div>
+
+    <div id="empty-state" class="empty-state" hidden>
+      <p class="text-body-md" style="color: var(--color-mute)">No posts with that tag yet.</p>
+    </div>
+
+    <Pagination
+      currentPage={page.currentPage}
+      totalPages={page.lastPage}
+      baseUrl="/blog"
+    />
+  </div>
+</BaseLayout>
+
+<script>
+  const filterEl = document.getElementById('tag-filter');
+  const grid = document.getElementById('posts-grid');
+  const emptyState = document.getElementById('empty-state');
+
+  filterEl?.addEventListener('click', (e) => {
+    const btn = (e.target as HTMLElement).closest('[data-tag]') as HTMLElement | null;
+    if (!btn) return;
+
+    filterEl.querySelectorAll('[data-tag]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    const tag = btn.dataset.tag ?? 'all';
+    let visible = 0;
+
+    grid?.querySelectorAll('.post-item').forEach(item => {
+      const el = item as HTMLElement;
+      const tags: string[] = JSON.parse(el.dataset.tags ?? '[]');
+      const show = tag === 'all' || tags.includes(tag);
+      el.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    if (emptyState) emptyState.hidden = visible > 0;
+  });
+</script>
+
+<style>
+.blog-archive {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 48px 24px 96px;
+}
+.archive-header {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 40px;
+}
+.archive-eyebrow { color: var(--color-mute); }
+.archive-desc { color: var(--color-body-text); }
+
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 32px;
+}
+.tag-filter button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.posts-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+@media (max-width: 960px) { .posts-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 600px) { .posts-grid { grid-template-columns: 1fr; } }
+
+.empty-state {
+  padding: 48px 0;
+  text-align: center;
+}
+</style>

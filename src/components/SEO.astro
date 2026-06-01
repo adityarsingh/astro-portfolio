@@ -1,0 +1,64 @@
+---
+import { SEO as AstroSEO } from 'astro-seo';
+
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  og?: {
+    type?: 'website' | 'article';
+    image?: string;
+    imageAlt?: string;
+  };
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  og = {},
+  noindex = false,
+} = Astro.props;
+
+const siteName = 'Aditya Singh';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.com';
+const pageUrl = canonical ?? Astro.url.href;
+const ogImage = og.image ? `${siteUrl}${og.image}` : `${siteUrl}/og/default.png`;
+const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+---
+
+<AstroSEO
+  title={fullTitle}
+  description={description}
+  canonical={pageUrl}
+  noindex={noindex}
+  nofollow={noindex}
+  openGraph={{
+    basic: {
+      title: fullTitle,
+      type: og.type ?? 'website',
+      image: ogImage,
+      url: pageUrl,
+    },
+    optional: {
+      description,
+      siteName,
+    },
+    image: {
+      alt: og.imageAlt ?? `${title} — ${siteName}`,
+    },
+  }}
+  twitter={{
+    card: 'summary_large_image',
+    title: fullTitle,
+    description,
+    image: ogImage,
+    imageAlt: og.imageAlt ?? `${title} — ${siteName}`,
+  }}
+  extend={{
+    meta: [
+      { name: 'author', content: 'Aditya Singh' },
+    ],
+  }}
+/>

@@ -1,0 +1,155 @@
+---
+const skills = [
+  {
+    label: '01',
+    gradient: 'develop',
+    title: 'AI Automation',
+    description:
+      'I let machines do the boring stuff — so people can focus on what matters. From custom GPT agents to automated workflows, I build invisible helpers that turn hours of work into seconds.',
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M11 2a2 2 0 0 1 2 2v1h2a2 2 0 0 1 2 2v1a2 2 0 0 1-2 2h-1v1a2 2 0 0 1-2 2H9a2 2 0 0 1-2-2v-1H6a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2h2V4a2 2 0 0 1 2-2z"/><circle cx="9" cy="9" r="1" fill="currentColor" stroke="none"/><circle cx="13" cy="9" r="1" fill="currentColor" stroke="none"/><path d="M9 13h4"/><path d="M8 19v-2"/><path d="M14 19v-2"/><path d="M5 19h12"/></svg>`,
+  },
+  {
+    label: '02',
+    gradient: 'preview',
+    title: 'Website Management',
+    description:
+      'I expertly manage and optimize large-scale websites, ensuring seamless performance, security, and user satisfaction — no matter the size or complexity.',
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="9"/><path d="M11 2a15 15 0 0 1 0 18"/><path d="M11 2a15 15 0 0 0 0 18"/><path d="M2 11h18"/></svg>`,
+  },
+  {
+    label: '03',
+    gradient: 'ship',
+    title: 'Digital Marketing',
+    description:
+      'Pair analytics with creativity to craft campaigns that resonate and convert. I bridge the gap between data and storytelling to build brands that people actually remember.',
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="2 17 8 11 12 15 20 5"/><polyline points="14 5 20 5 20 11"/></svg>`,
+  },
+  {
+    label: '04',
+    gradient: 'develop',
+    title: 'SEO / GEO',
+    description:
+      'Deploy data-driven strategies that boost visibility on search engines and on LLMs, and connect with local audiences. Getting found — by humans and AI alike.',
+    icon: `<svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="10" cy="10" r="7"/><line x1="15.5" y1="15.5" x2="20" y2="20"/></svg>`,
+  },
+];
+---
+
+<section class="superpowers">
+  <div class="superpowers-inner">
+    <div class="section-header">
+      <span class="text-caption-mono section-eyebrow">What I do</span>
+      <h2 class="text-display-lg">Superpowers.</h2>
+      <p class="text-body-lg section-desc">
+        I like building systems that are clean, scalable, and useful — the kind that make
+        websites easier to run and easier to find.
+      </p>
+    </div>
+
+    <div class="skills-grid">
+      {skills.map(skill => (
+        <div class={`skill-card gradient-top-${skill.gradient}`}>
+          <div class="skill-icon-row">
+            <span class={`skill-icon icon-${skill.gradient}`} set:html={skill.icon} />
+            <span class={`skill-label text-caption-mono label-${skill.gradient}`}>{skill.label}</span>
+          </div>
+          <h3 class="text-display-sm skill-title">{skill.title}</h3>
+          <p class="text-body-sm skill-desc">{skill.description}</p>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+.superpowers {
+  background-color: var(--color-canvas-soft);
+  padding: var(--spacing-5xl) 0;
+  border-top: 1px solid var(--color-hairline);
+  border-bottom: 1px solid var(--color-hairline);
+}
+
+.superpowers-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.section-header {
+  max-width: 560px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.section-eyebrow { color: var(--color-mute); }
+.section-desc { color: var(--color-body-text); margin-top: 4px; }
+
+/* ── Grid ── */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+@media (min-width: 900px) { .skills-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 540px)  { .skills-grid { grid-template-columns: 1fr; } }
+
+/* ── Card ── */
+.skill-card {
+  background-color: var(--color-canvas);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-lg);
+  box-shadow: var(--shadow-2);
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  position: relative;
+  overflow: hidden;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+}
+.skill-card:hover {
+  box-shadow: var(--shadow-3);
+  transform: translateY(-2px);
+}
+
+/* Gradient top-border accent */
+.skill-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.gradient-top-develop::before { background: var(--gradient-develop); }
+.gradient-top-preview::before { background: var(--gradient-preview); }
+.gradient-top-ship::before    { background: var(--gradient-ship); }
+
+/* Icon row */
+.skill-icon-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.skill-icon {
+  display: flex;
+  align-items: center;
+  line-height: 0;
+}
+.icon-develop { color: #007cf0; }
+.icon-preview  { color: #7928ca; }
+.icon-ship     { color: #ff4d4d; }
+
+.skill-label {
+  font-size: 11px;
+  letter-spacing: 0.04em;
+}
+.label-develop { color: #007cf0; }
+.label-preview  { color: #7928ca; }
+.label-ship     { color: #ff4d4d; }
+
+.skill-title { color: var(--color-ink); }
+.skill-desc  { color: var(--color-body-text); line-height: 1.55; flex: 1; }
+</style>
