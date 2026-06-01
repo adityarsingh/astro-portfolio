@@ -27,3 +27,7 @@ pnpm-debug.log*
 .idea/
 *.swp
 *.swo
+
+# Claude Code (contains API keys and local config)
+.mcp.json
+.claude/
