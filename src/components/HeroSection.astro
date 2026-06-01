@@ -27,14 +27,7 @@ import MeshGradient from './MeshGradient.astro';
     <div class="hero-photo-wrap" aria-hidden="true">
       <div class="hero-photo-ring">
         <div class="hero-photo-inner">
-          <!--
-            Drop your photo here:
-            <img src="/profile.jpg" alt="Aditya Singh" />
-            Until then, the initials placeholder shows.
-          -->
-          <div class="hero-photo-placeholder">
-            <span>AR</span>
-          </div>
+            <img src="/photos/profile.jpg" alt="Aditya Singh" />
         </div>
       </div>
     </div>
@@ -150,29 +143,8 @@ import MeshGradient from './MeshGradient.astro';
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center 25%;
   display: block;
 }
 
-/* Placeholder shown when no photo is set */
-.hero-photo-placeholder {
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--color-canvas-soft-2), var(--color-canvas-soft));
-}
-
-.hero-photo-placeholder span {
-  font-family: var(--font-mono);
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: 0.05em;
-  color: var(--color-hairline-strong);
-  user-select: none;
-}
-
-@media (max-width: 768px) {
-  .hero-photo-placeholder span { font-size: 22px; }
-}
 </style>
