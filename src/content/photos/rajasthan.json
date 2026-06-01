@@ -2,79 +2,523 @@
   "title": "Rajasthan",
   "description": "Colours, forts, and the desert — a week through the land of maharajas.",
   "date": "2025-11-01",
-  "coverImage": "/photos/rajasthan/IMG_3365-scaled.jpg",
+  "coverImage": "/photos/nepal/DSC00363.jpg",
   "coverAlt": "Vibrant street scene in Rajasthan",
   "location": "Rajasthan, India",
   "images": [
     {
-      "src": "/photos/rajasthan/IMG_2968-scaled.jpg",
+      "src": "/photos/nepal/IMG_4861.jpg",
       "alt": "Landscape of the Rajasthan countryside",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3197-scaled.jpg",
+      "src": "/photos/nepal/IMG_4864.jpg",
       "alt": "Architecture and colours of Rajasthan",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3218-scaled.jpg",
+      "src": "/photos/nepal/IMG_4865.jpg",
       "alt": "Desert landscape at dusk",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3236-scaled.jpg",
+      "src": "/photos/nepal/IMG_4866.jpg",
       "alt": "Traditional Rajasthani scene",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3239-scaled.jpg",
+      "src": "/photos/nepal/IMG_4867.jpg",
       "alt": "Fort walls glowing in the afternoon sun",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3261-scaled.jpg",
+      "src": "/photos/nepal/IMG_4870.jpg",
       "alt": "Ancient step-well with intricate stonework",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3365-scaled.jpg",
+      "src": "/photos/nepal/IMG_4878.jpg",
       "alt": "Vibrant market street in Rajasthan",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3397-scaled.jpg",
+      "src": "/photos/nepal/IMG_4890.jpg",
       "alt": "Palace courtyard bathed in golden light",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3411-scaled.jpg",
+      "src": "/photos/nepal/IMG_4895.jpg",
       "alt": "Silhouette of a Rajasthani fort at sunset",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3453-scaled.jpg",
+      "src": "/photos/nepal/IMG_4963.jpg",
       "alt": "Sand dunes stretching to the horizon",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3454-scaled.jpg",
+      "src": "/photos/nepal/IMG_4963-1.jpg",
       "alt": "Camel at rest in the Thar Desert",
       "width": 4032,
       "height": 3024
     },
     {
-      "src": "/photos/rajasthan/IMG_3456-scaled.jpg",
+      "src": "/photos/nepal/IMG_4974.jpg",
       "alt": "Sunset over the Rajasthan desert",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5001.jpg",
+      "alt": "Rajasthani village at golden hour",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5019.jpg",
+      "alt": "Fort ramparts under a blue sky",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5043.jpg",
+      "alt": "Intricate jharokha window detail",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5044.jpg",
+      "alt": "Colourful turbans at the market",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5103.jpg",
+      "alt": "Lake palace reflecting in still water",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5118.jpg",
+      "alt": "Desert dunes at sunrise",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5128.jpg",
+      "alt": "Camel caravan silhouette at dusk",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5131.jpg",
+      "alt": "Blue city rooftops of Jodhpur",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5146.jpg",
+      "alt": "Havelis lining a narrow lane",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5168.jpg",
+      "alt": "Rajasthani woman in traditional dress",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5178.jpg",
+      "alt": "Stepwell geometry at Chand Baori",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5248.jpg",
+      "alt": "Mehrangarh Fort from below",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5259.jpg",
+      "alt": "Golden city of Jaisalmer at dusk",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5260.jpg",
+      "alt": "Carved sandstone facade",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5270.jpg",
+      "alt": "Pushkar lake at dawn",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5287.jpg",
+      "alt": "Desert camp under a star-filled sky",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5288.jpg",
+      "alt": "Amber Fort illuminated at night",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5301.jpg",
+      "alt": "Colourful bangles at a street stall",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5317.jpg",
+      "alt": "Palace courtyard at midday",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5318.jpg",
+      "alt": "Rajput architecture detail",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5352.jpg",
+      "alt": "City Palace from the lake",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5360.jpg",
+      "alt": "Spice market colours",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5364.jpg",
+      "alt": "Fort walls at golden hour",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5368.jpg",
+      "alt": "Camel fair at Pushkar",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5377.jpg",
+      "alt": "Desert horizon at sunset",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5381.jpg",
+      "alt": "Jaisalmer fort detail",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5393.jpg",
+      "alt": "Narrow alley in the old city",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5404.jpg",
+      "alt": "Rajasthani folk musicians",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5410.jpg",
+      "alt": "Dunes at the Sam Sand Dunes",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5434.jpg",
+      "alt": "Palace reflection in lake",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5436.jpg",
+      "alt": "Ancient carved pillars",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5440.jpg",
+      "alt": "Village at dusk",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5464.jpg",
+      "alt": "Sunset over the Thar Desert",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5476.jpg",
+      "alt": "Night market in Jaipur",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IMG_5477.jpg",
+      "alt": "Rajasthan journey's end",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/DSC00363.jpg",
+      "alt": "Wide-angle view of Rajasthan landscape",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00405.jpg",
+      "alt": "Fort facade in sharp relief",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00431.jpg",
+      "alt": "Desert scene captured on Sony camera",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00439.jpg",
+      "alt": "Rajasthani architecture detail",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00473.jpg",
+      "alt": "Village with terraced fields",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00492.jpg",
+      "alt": "Landscape in crisp detail",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00516.jpg",
+      "alt": "Road leading toward a fort",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00517.jpg",
+      "alt": "Lake at the foot of a hill",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00527.jpg",
+      "alt": "Long exposure of a desert scene",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00533.jpg",
+      "alt": "Colourful fabric at a market",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00535.jpg",
+      "alt": "Fort at close range",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00569.jpg",
+      "alt": "Golden morning light on sandstone",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00579.jpg",
+      "alt": "Dunes and horizon",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00586.jpg",
+      "alt": "Ridgeline at sunset",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00610.jpg",
+      "alt": "Dramatic cloud formations over the desert",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00615.jpg",
+      "alt": "Open plains under a wide sky",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00631.jpg",
+      "alt": "Temple in the hills at dusk",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00633.jpg",
+      "alt": "Ancient carved stone",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00652.jpg",
+      "alt": "View from a high rampart",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00671.jpg",
+      "alt": "Path through a boulder field",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00674.jpg",
+      "alt": "Summit cairn with distant landscape",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00676.jpg",
+      "alt": "Descent toward a valley",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00709.jpg",
+      "alt": "River valley at dusk",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00745.jpg",
+      "alt": "Landscape reflected in still water",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00774.jpg",
+      "alt": "Wide open terrain",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00784.jpg",
+      "alt": "Blue-hour light over the desert",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00802.jpg",
+      "alt": "Hilltop fort emerging from haze",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00816.jpg",
+      "alt": "Road winding along a ridgeline",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00824.jpg",
+      "alt": "Vast desert plain below a fort",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00890.jpg",
+      "alt": "Open landscape at midday",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00895.jpg",
+      "alt": "Colourful wall at a temple",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00901.jpg",
+      "alt": "Last light on the highest rampart",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/DSC00934.jpg",
+      "alt": "Fort at golden hour on the final day",
+      "width": 6000,
+      "height": 4000
+    },
+    {
+      "src": "/photos/nepal/IDG_20251207_100004_443.jpg",
+      "alt": "Morning scene in Rajasthan",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251207_100737_034.jpg",
+      "alt": "Group moment on the road",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251207_112001_266.jpg",
+      "alt": "Midday break with desert views",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251208_174922_580.jpg",
+      "alt": "Evening in Rajasthan",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251208_174928_899.jpg",
+      "alt": "Sunset colours over the desert",
+      "width": 4032,
+      "height": 3024
+    },
+    {
+      "src": "/photos/nepal/IDG_20251208_180610_445.jpg",
+      "alt": "Twilight over the Rajasthan camp",
       "width": 4032,
       "height": 3024
     }
