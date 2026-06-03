@@ -1,5 +1,6 @@
 ---
-import BlogCard from './BlogCard.astro';
+import { formatDate } from '@/lib/formatDate';
+import { readingTime } from '@/lib/readingTime';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -8,57 +9,113 @@ interface Props {
 const { posts } = Astro.props;
 ---
 
-<section class="blog-preview">
-  <div class="blog-preview-inner">
-    <div class="section-header">
-      <span class="text-caption-mono section-eyebrow">Writing</span>
-      <h2 class="text-display-lg">Latest writing.</h2>
-    </div>
-    <div class="blog-preview-grid">
-      {posts.map(post => (
-        <BlogCard
-          title={post.data.title}
-          description={post.data.description}
-          date={post.data.date}
-          slug={post.slug}
-          tags={post.data.tags}
-        />
-      ))}
-    </div>
-    <div class="blog-preview-more">
-      <a href="/blog" class="btn-secondary">View all posts →</a>
-    </div>
+<section class="card writing-card">
+  <span class="eyebrow">Writing</span>
+  <h2 class="section-title">Latest posts.</h2>
+
+  <div class="blog-cards">
+    {posts.map(post => (
+      <a href={`/blog/${post.slug}`} class="blog-card-item">
+        <div class="blog-card-meta">
+          <span>{formatDate(post.data.date, 'short')}</span>
+          <span>·</span>
+          <span>{post.data.tags[0] ?? ''}</span>
+        </div>
+        <div class="blog-card-title">{post.data.title}</div>
+        <div class="blog-card-desc">{post.data.description}</div>
+        <div class="blog-card-read">{readingTime(post.body ?? '')} min read</div>
+      </a>
+    ))}
+  </div>
+
+  <div class="writing-footer">
+    <a href="/blog" class="view-all">View all writing →</a>
   </div>
 </section>
 
 <style>
-.blog-preview {
-  background-color: var(--color-canvas-soft);
-  padding: var(--spacing-5xl) 0;
-  border-top: 1px solid var(--color-hairline);
+.writing-card {
+  padding: var(--card-py) var(--card-px) 0;
 }
-.blog-preview-inner {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-}
-.section-header {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.section-eyebrow { color: var(--color-mute); }
-.blog-preview-grid {
+
+.blog-cards {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
+  gap: 1px;
+  background: var(--color-hairline);
+  border-top: 1px solid var(--color-hairline);
+  margin: 0 calc(-1 * var(--card-px)) 28px;
 }
-@media (max-width: 960px) { .blog-preview-grid { grid-template-columns: repeat(2, 1fr); } }
-@media (max-width: 600px) { .blog-preview-grid { grid-template-columns: 1fr; } }
-.blog-preview-more {
+
+.blog-card-item {
+  background: var(--color-canvas-soft);
+  padding: 28px 30px;
   display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color 0.1s;
+}
+.blog-card-item:hover { background: var(--color-canvas); }
+
+.blog-card-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+  display: flex;
+  gap: 8px;
+}
+
+.blog-card-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.35;
+  color: var(--color-ink);
+}
+
+.blog-card-desc {
+  font-size: 12.5px;
+  line-height: 1.62;
+  color: var(--color-body-text);
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.blog-card-read {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+  margin-top: auto;
+  padding-top: 6px;
+}
+
+.writing-footer {
+  padding-bottom: var(--card-py);
+}
+
+.view-all {
+  font-size: 13px;
+  color: var(--color-body-text);
+  text-decoration: none;
+  letter-spacing: -0.01em;
+  transition: color 0.1s;
+}
+.view-all:hover { color: var(--color-ink); }
+
+@media (max-width: 860px) {
+  .blog-cards { grid-template-columns: 1fr; margin: 0 calc(-1 * var(--card-px)) 24px; }
+}
+
+@media (max-width: 540px) {
+  .writing-card { padding: 28px 24px 0; }
+  .blog-cards   { margin: 0 -24px 20px; }
 }
 </style>

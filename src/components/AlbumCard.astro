@@ -36,21 +36,20 @@ const { slug, title, description, date, location, coverImage, coverAlt, imageCou
   display: block;
   text-decoration: none;
   color: inherit;
-  border-radius: var(--radius-lg);
+  border-radius: var(--radius-card);
   overflow: hidden;
-  background-color: var(--color-canvas);
-  box-shadow: var(--shadow-2);
-  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  background-color: var(--color-canvas-soft);
+  transition: transform 0.18s ease;
 }
 .album-card:hover {
-  box-shadow: var(--shadow-4);
   transform: translateY(-2px);
 }
+.album-card:hover .album-cover img { transform: scale(1.04); }
 .album-cover {
   position: relative;
   aspect-ratio: 3/2;
   overflow: hidden;
-  background-color: var(--color-canvas-soft-2);
+  background-color: var(--color-hairline);
 }
 .album-cover img {
   width: 100%;
@@ -58,7 +57,6 @@ const { slug, title, description, date, location, coverImage, coverAlt, imageCou
   object-fit: cover;
   transition: transform 0.3s ease;
 }
-.album-card:hover .album-cover img { transform: scale(1.03); }
 .album-count {
   position: absolute;
   bottom: 10px;
@@ -70,10 +68,10 @@ const { slug, title, description, date, location, coverImage, coverAlt, imageCou
   font-size: 11px;
 }
 .album-info {
-  padding: var(--spacing-md);
+  padding: 16px 20px 20px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 .album-meta {
   display: flex;

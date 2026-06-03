@@ -4,43 +4,42 @@
 @import "@fontsource-variable/geist-mono";
 
 /* ─────────────────────────────────────────────────────────────────────────
-   DARK MODE TOKENS  (default — no attribute required)
-   Light mode overrides live in  html[data-theme="light"]  below.
+   LIGHT MODE TOKENS  (default — warm cream palette)
+   Dark mode overrides live in  html[data-theme="dark"]  below.
 ───────────────────────────────────────────────────────────────────────── */
 
 @theme {
-  /* ── Adaptive color tokens ── */
-  /* These are the DARK mode values. Light overrides are below. */
-  --color-primary:         #efefef;   /* Light CTA in dark mode          */
-  --color-on-primary:      #0a0a0a;   /* Dark text on light CTA          */
-  --color-ink:             #ededed;   /* Near-white body text            */
-  --color-body-text:       #999999;   /* Secondary text                  */
-  --color-mute:            #555555;   /* Disabled / placeholder          */
-  --color-hairline:        #282828;   /* Subtle borders                  */
-  --color-hairline-strong: #404040;   /* Stronger borders                */
-  --color-canvas:          #0a0a0a;   /* Page / card background          */
-  --color-canvas-soft:     #111111;   /* Slightly elevated surface       */
-  --color-canvas-soft-2:   #1c1c1c;   /* Hover / active state            */
-  --color-link:            #5aabff;   /* Brighter blue for dark bg       */
-  --color-link-deep:       #7fbfff;
-  --color-link-bg-soft:    #0f2240;
-  --color-error:           #ff4d4d;
-  --color-error-soft:      #2d0f0f;
-  --color-error-deep:      #ff7070;
+  /* Adaptive color tokens — LIGHT mode defaults */
+  --color-canvas:          #eeebe5;   /* Page background (warm cream)     */
+  --color-canvas-soft:     #ffffff;   /* Card / surface background        */
+  --color-canvas-soft-2:   #f5f1eb;   /* Hover / active state             */
+  --color-ink:             #1a1a1a;   /* Primary text                     */
+  --color-body-text:       #545454;   /* Secondary text                   */
+  --color-mute:            #9a9a9a;   /* Disabled / placeholder           */
+  --color-hairline:        #e4dfd7;   /* Subtle borders                   */
+  --color-hairline-strong: #c8c0b5;   /* Stronger borders                 */
+  --color-primary:         #1a1a1a;   /* CTA / primary button bg          */
+  --color-on-primary:      #eeebe5;   /* Text on primary button           */
+  --color-link:            #1a1a1a;
+  --color-link-deep:       #333333;
+  --color-link-bg-soft:    #eeebe5;
+  --color-error:           #ee0000;
+  --color-error-soft:      #fde8e8;
+  --color-error-deep:      #c50000;
   --color-warning:         #f5a623;
-  --color-warning-soft:    #2d1e06;
-  --color-warning-deep:    #f7c05e;
-  --color-violet:          #a855f7;
-  --color-violet-soft:     #1f0a38;
-  --color-violet-deep:     #c084fc;
-  --color-cyan:            #22d3ee;
-  --color-cyan-soft:       #042838;
-  --color-cyan-deep:       #67e8f9;
+  --color-warning-soft:    #fef3e0;
+  --color-warning-deep:    #ab570a;
+  --color-violet:          #7928ca;
+  --color-violet-soft:     #ede0f7;
+  --color-violet-deep:     #4c2889;
+  --color-cyan:            #0ea5e9;
+  --color-cyan-soft:       #e0f5ff;
+  --color-cyan-deep:       #0284c7;
   --color-highlight-pink:  #ff0080;
 
-  /* ── Stable tokens (same in both modes) ── */
-  --font-sans: "Geist Variable", Inter, system-ui, -apple-system, sans-serif;
-  --font-mono: "Geist Mono Variable", ui-monospace, SFMono-Regular, Menlo, Monaco, monospace;
+  /* ── Stable tokens ── */
+  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Monaco, monospace;
 
   --spacing-xxs:     4px;
   --spacing-xs:      8px;
@@ -60,133 +59,104 @@
   --radius-md:      8px;
   --radius-lg:      12px;
   --radius-xl:      16px;
+  --radius-card:    20px;
   --radius-pill-sm: 64px;
   --radius-pill:    100px;
   --radius-full:    9999px;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   :root  — non-theme CSS vars (shadows, gradients, etc.)
-   These are the DARK mode values.
+   :root  — non-theme CSS vars
 ───────────────────────────────────────────────────────────────────────── */
 
 :root {
-  /* Dark-mode shadows */
-  --shadow-1: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
-  --shadow-2: 0 1px 2px  rgba(0, 0, 0, 0.7),
-              0 2px 4px  rgba(0, 0, 0, 0.5),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.07);
-  --shadow-3: 0 2px 4px  rgba(0, 0, 0, 0.7),
-              0 8px 16px rgba(0, 0, 0, 0.5),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
-  --shadow-4: 0 4px 8px  rgba(0, 0, 0, 0.8),
-              0 12px 24px rgba(0, 0, 0, 0.6),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
-  --shadow-5: 0 1px 2px  rgba(0, 0, 0, 0.8),
-              0 8px 20px rgba(0, 0, 0, 0.7),
-              0 24px 40px rgba(0, 0, 0, 0.6),
-              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  /* Light-mode shadows */
+  --shadow-1: inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-2: 0px 1px 1px rgba(0, 0, 0, 0.02),
+              0px 2px 2px rgba(0, 0, 0, 0.03),
+              inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-3: 0px 2px 4px rgba(0, 0, 0, 0.04),
+              0px 8px 12px -4px rgba(0, 0, 0, 0.06),
+              inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-4: 0px 4px 8px rgba(0, 0, 0, 0.05),
+              0px 12px 20px -4px rgba(0, 0, 0, 0.08),
+              inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --shadow-5: 0px 1px 2px rgba(0, 0, 0, 0.03),
+              0px 8px 16px -4px rgba(0, 0, 0, 0.06),
+              0px 24px 32px -8px rgba(0, 0, 0, 0.08),
+              inset 0 0 0 1px rgba(0, 0, 0, 0.06);
 
-  /* Nav background — frosted glass, dark mode */
-  --nav-bg: rgba(10, 10, 10, 0.85);
+  /* CTA card — inverts in dark mode */
+  --color-cta-bg:     #1a1a1a;
+  --color-cta-fg:     #eeebe5;
+  --color-cta-sub:    rgba(238, 235, 229, 0.42);
+  --color-cta-btn-bg: #eeebe5;
+  --color-cta-btn-fg: #1a1a1a;
 
-  /* Code block — stays dark in both modes */
-  --color-code-bg:   #161616;
-  --color-code-text: #c9d1d9;
+  /* Code block */
+  --color-code-bg:   #f5f1eb;
+  --color-code-text: #1a1a1a;
 
-  /* Brand gradients — unchanged in both modes */
+  /* Brand gradients */
   --gradient-develop: linear-gradient(135deg, #007cf0, #00dfd8);
   --gradient-preview: linear-gradient(135deg, #7928ca, #ff0080);
   --gradient-ship:    linear-gradient(135deg, #ff4d4d, #f9cb28);
 
-  --nav-height: 64px;
+  /* Layout */
+  --card-px:   52px;
+  --card-py:   44px;
+  --cards-gap: 8px;
+  --max-w:     1100px;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   LIGHT MODE  — applied when  <html data-theme="light">
+   DARK MODE  — applied when  <html data-theme="dark">
 ───────────────────────────────────────────────────────────────────────── */
 
-html[data-theme="light"] {
-  /* Adaptive color overrides */
-  --color-primary:         #171717;
-  --color-on-primary:      #ffffff;
-  --color-ink:             #171717;
-  --color-body-text:       #4d4d4d;
-  --color-mute:            #888888;
-  --color-hairline:        #ebebeb;
-  --color-hairline-strong: #a1a1a1;
-  --color-canvas:          #ffffff;
-  --color-canvas-soft:     #fafafa;
-  --color-canvas-soft-2:   #f5f5f5;
-  --color-link:            #0070f3;
-  --color-link-deep:       #0761d1;
-  --color-link-bg-soft:    #d3e5ff;
-  --color-error:           #ee0000;
-  --color-error-soft:      #f7d4d6;
-  --color-error-deep:      #c50000;
-  --color-warning:         #f5a623;
-  --color-warning-soft:    #ffefcf;
-  --color-warning-deep:    #ab570a;
-  --color-violet:          #7928ca;
-  --color-violet-soft:     #d8ccf1;
-  --color-violet-deep:     #4c2889;
-  --color-cyan:            #50e3c2;
-  --color-cyan-soft:       #aaffec;
-  --color-cyan-deep:       #29bc9b;
-  --color-highlight-pink:  #ff0080;
+html[data-theme="dark"] {
+  --color-canvas:          #131210;
+  --color-canvas-soft:     #1d1c19;
+  --color-canvas-soft-2:   #262420;
+  --color-ink:             #edede9;
+  --color-body-text:       #969490;
+  --color-mute:            #7a7873;
+  --color-hairline:        #2c2a26;
+  --color-hairline-strong: #403e3a;
+  --color-primary:         #e8e4dd;
+  --color-on-primary:      #1a1915;
+  --color-link:            #edede9;
+  --color-link-deep:       #c8c4bc;
+  --color-link-bg-soft:    #262420;
 
-  /* Nav background — light mode */
-  --nav-bg: rgba(255, 255, 255, 0.9);
+  --shadow-1: inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  --shadow-2: 0 1px 2px rgba(0, 0, 0, 0.7),
+              0 2px 4px rgba(0, 0, 0, 0.5),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.07);
+  --shadow-3: 0 2px 4px rgba(0, 0, 0, 0.7),
+              0 8px 16px rgba(0, 0, 0, 0.5),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  --shadow-4: 0 4px 8px rgba(0, 0, 0, 0.8),
+              0 12px 24px rgba(0, 0, 0, 0.6),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
+  --shadow-5: 0 1px 2px rgba(0, 0, 0, 0.8),
+              0 8px 20px rgba(0, 0, 0, 0.7),
+              0 24px 40px rgba(0, 0, 0, 0.6),
+              inset 0 0 0 1px rgba(255, 255, 255, 0.09);
 
-  /* Light-mode shadows: subtle blacks + inset hairline */
-  --shadow-1: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
-  --shadow-2: 0px 1px 1px rgba(0, 0, 0, 0.02),
-              0px 2px 2px rgba(0, 0, 0, 0.04),
-              inset 0 0 0 1px rgba(0, 0, 0, 0.08);
-  --shadow-3: 0px 2px 2px  rgba(0, 0, 0, 0.04),
-              0px 8px 8px  -8px rgba(0, 0, 0, 0.04),
-              inset 0 0 0 1px rgba(0, 0, 0, 0.08);
-  --shadow-4: 0px 2px 2px  rgba(0, 0, 0, 0.04),
-              0px 8px 16px -4px rgba(0, 0, 0, 0.04),
-              inset 0 0 0 1px rgba(0, 0, 0, 0.08);
-  --shadow-5: 0px 1px 1px  rgba(0, 0, 0, 0.02),
-              0px 8px 16px -4px rgba(0, 0, 0, 0.04),
-              0px 24px 32px -8px rgba(0, 0, 0, 0.06),
-              inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --color-cta-bg:     #e8e4dd;
+  --color-cta-fg:     #1a1915;
+  --color-cta-sub:    rgba(26, 25, 21, 0.48);
+  --color-cta-btn-bg: #1a1915;
+  --color-cta-btn-fg: #e8e4dd;
+
+  --color-code-bg:   #1d1c19;
+  --color-code-text: #c9d1d9;
 }
 
 /* ─────────────────────────────────────────────────────────────────────────
-   Base Styles
+   Theme switching transitions
 ───────────────────────────────────────────────────────────────────────── */
 
-::selection {
-  background-color: var(--color-ink);
-  color: var(--color-canvas);
-}
-
-html {
-  background-color: var(--color-canvas-soft);
-  color: var(--color-ink);
-  font-family: var(--font-sans);
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  /* Smooth theme transition */
-  transition: background-color 0.2s ease, color 0.2s ease;
-}
-
-body {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-}
-
-main { flex: 1; }
-
-/*
-  Theme-switch transitions — only animate during the brief window when
-  the user clicks the toggle, not on every hover. The JS sets
-  --theme-transition to a non-zero duration and removes it 300ms later.
-*/
 :root { --theme-transition: 0s; }
 
 html.theme-switching,
@@ -200,42 +170,69 @@ html.theme-switching *::after {
     box-shadow       var(--theme-transition) ease !important;
 }
 
+/* ─────────────────────────────────────────────────────────────────────────
+   Base Styles
+───────────────────────────────────────────────────────────────────────── */
+
+::selection {
+  background-color: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+html {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-wrap: pretty;
+}
+
+body {
+  min-height: 100vh;
+  padding: 24px 24px 64px;
+}
+
+@media (max-width: 540px) {
+  body { padding: 16px 16px 48px; }
+}
+
 /* ─── Typography Utilities ────────────────────────────────────────────── */
 
 .text-display-xl {
-  font-size: 48px;
+  font-size: clamp(34px, 4vw, 52px);
   font-weight: 600;
-  line-height: 48px;
-  letter-spacing: -0.05em;
+  line-height: 1.08;
+  letter-spacing: -0.04em;
 }
 .text-display-lg {
   font-size: 32px;
   font-weight: 600;
-  line-height: 40px;
+  line-height: 1.15;
   letter-spacing: -0.04em;
 }
 .text-display-md {
   font-size: 24px;
   font-weight: 600;
-  line-height: 32px;
+  line-height: 1.2;
   letter-spacing: -0.04em;
 }
 .text-display-sm {
-  font-size: 20px;
+  font-size: 19px;
   font-weight: 600;
-  line-height: 28px;
+  line-height: 1.3;
   letter-spacing: -0.03em;
 }
-.text-body-lg  { font-size: 18px; font-weight: 400; line-height: 28px; }
-.text-body-md  { font-size: 16px; font-weight: 400; line-height: 24px; }
-.text-body-sm  { font-size: 14px; font-weight: 400; line-height: 20px; letter-spacing: -0.02em; }
-.text-caption  { font-size: 12px; font-weight: 400; line-height: 16px; }
+.text-body-lg  { font-size: 15px; font-weight: 400; line-height: 1.72; }
+.text-body-md  { font-size: 14.5px; font-weight: 400; line-height: 1.78; }
+.text-body-sm  { font-size: 13.5px; font-weight: 400; line-height: 1.6; letter-spacing: -0.01em; }
+.text-caption  { font-size: 12px; font-weight: 400; line-height: 1.4; }
 .text-caption-mono {
   font-family: var(--font-mono);
-  font-size: 12px;
+  font-size: 10px;
   font-weight: 400;
-  line-height: 16px;
-  letter-spacing: 0.06em;
+  line-height: 1.4;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
 }
 .text-code {
@@ -245,55 +242,115 @@ html.theme-switching *::after {
   line-height: 20px;
 }
 
+/* ─── Layout Utilities ────────────────────────────────────────────────── */
+
+.pg {
+  max-width: var(--max-w);
+  margin: 0 auto;
+}
+
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: var(--cards-gap);
+}
+
+/* ─── Eyebrow ─────────────────────────────────────────────────────────── */
+
+.eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--color-mute);
+  margin-bottom: 14px;
+}
+
+.section-title {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin-bottom: 24px;
+}
+
 /* ─── Component Classes ───────────────────────────────────────────────── */
 
 @layer components {
+  .card {
+    background-color: var(--color-canvas-soft);
+    border-radius: var(--radius-card);
+  }
+
+  /* Primary button — dark bg in light mode, flips in dark */
   .btn-primary {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
-    border-radius: var(--radius-pill);
-    padding: 0 var(--spacing-sm);
-    height: 44px;
-    font-size: 16px;
+    gap: 5px;
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    font-size: 13.5px;
     font-weight: 500;
-    line-height: 24px;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
     text-decoration: none;
+    letter-spacing: -0.01em;
     white-space: nowrap;
     border: none;
     cursor: pointer;
+    transition: opacity 0.15s;
+    font-family: var(--font-sans);
   }
-  .btn-primary:hover { opacity: 0.85; }
+  .btn-primary:hover { opacity: 0.78; }
 
-  .btn-secondary {
+  /* Outline button */
+  .btn-outline {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    background-color: var(--color-canvas-soft-2);
-    color: var(--color-ink);
+    gap: 5px;
+    background: transparent;
+    color: var(--color-body-text);
+    font-size: 13.5px;
+    padding: 9px 20px;
     border-radius: var(--radius-pill);
-    padding: 0 var(--spacing-sm);
-    height: 44px;
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
+    border: 1px solid var(--color-hairline);
     text-decoration: none;
-    box-shadow: var(--shadow-2);
+    letter-spacing: -0.01em;
     white-space: nowrap;
-    border: none;
-    cursor: pointer;
+    transition: border-color 0.15s, color 0.15s;
+    font-family: var(--font-sans);
   }
-  .btn-secondary:hover { box-shadow: var(--shadow-3); }
+  .btn-outline:hover { color: var(--color-ink); border-color: var(--color-body-text); }
 
+  /* Button for CTA card (inverted) */
+  .btn-cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--color-cta-btn-bg);
+    color: var(--color-cta-btn-fg);
+    font-size: 13.5px;
+    font-weight: 500;
+    padding: 10px 22px;
+    border-radius: var(--radius-pill);
+    text-decoration: none;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    transition: opacity 0.15s;
+    font-family: var(--font-sans);
+  }
+  .btn-cta:hover { opacity: 0.85; }
+
+  /* Nav button (CV link) */
   .btn-nav {
     display: inline-flex;
     align-items: center;
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
     border-radius: var(--radius-sm);
     padding: 0 12px;
     height: 30px;
@@ -307,30 +364,29 @@ html.theme-switching *::after {
   }
   .btn-nav:hover { opacity: 0.8; }
 
-  .card {
-    background-color: var(--color-canvas);
-    border-radius: var(--radius-md);
-    padding: var(--spacing-lg);
-    box-shadow: var(--shadow-2);
-  }
-  .card:hover { box-shadow: var(--shadow-3); }
-
+  /* Tag pill (blog filter) */
   .tag-pill {
     display: inline-flex;
     align-items: center;
-    background-color: var(--color-canvas-soft-2);
-    color: var(--color-body-text);
-    border-radius: var(--radius-full);
-    padding: 2px var(--spacing-xs);
-    font-size: 12px;
-    font-weight: 400;
-    line-height: 16px;
+    background: var(--color-canvas-soft);
+    color: var(--color-mute);
+    border: 1px solid var(--color-hairline);
+    border-radius: var(--radius-pill);
+    padding: 6px 14px;
+    font-family: var(--font-mono);
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
     text-decoration: none;
+    cursor: pointer;
+    white-space: nowrap;
+    transition: border-color 0.1s, color 0.1s, background-color 0.1s;
   }
-  .tag-pill:hover { background-color: var(--color-hairline); }
+  .tag-pill:hover { color: var(--color-body-text); border-color: var(--color-body-text); }
   .tag-pill.active {
-    background-color: var(--color-primary);
-    color: var(--color-on-primary);
+    background-color: var(--color-ink);
+    color: var(--color-canvas);
+    border-color: var(--color-ink);
   }
 }
 

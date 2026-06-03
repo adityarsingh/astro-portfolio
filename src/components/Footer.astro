@@ -3,129 +3,41 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-left">
-      <div class="footer-brand">
-        <div class="footer-logo-mark" aria-hidden="true">ARS</div>
-        <span class="footer-brand-name">Aditya Raj Singh</span>
-      </div>
-      <p class="footer-copy text-body-sm">
-        Content · Search · Automation
-      </p>
-    </div>
-
-    <nav class="footer-nav" aria-label="Footer navigation">
-      <div class="footer-col">
-        <span class="footer-col-label text-caption-mono">Pages</span>
-        <a href="/" class="footer-link">Home</a>
-        <a href="/blog" class="footer-link">Blog</a>
-        <a href="/photos" class="footer-link">Photo Book</a>
-        <a href="/cv/aditya-cv.pdf" class="footer-link" target="_blank" rel="noopener noreferrer">CV</a>
-      </div>
-      <div class="footer-col">
-        <span class="footer-col-label text-caption-mono">Connect</span>
-        <a href="https://linkedin.com/in/adityar-singh/" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-        <a href="https://github.com/adityarsingh" class="footer-link" target="_blank" rel="noopener noreferrer">GitHub</a>
-        <a href="mailto:hello@adityarsingh.in" class="footer-link">Email</a>
-        <a href="/rss.xml" class="footer-link">RSS</a>
-      </div>
-    </nav>
-  </div>
-
-  <div class="footer-bottom">
-    <span class="text-caption footer-copy-bottom">
-      © {year} Aditya Raj Singh
-    </span>
+  <p>© {year} Aditya Raj Singh</p>
+  <div class="footer-links">
+    <a href="https://linkedin.com/in/adityar-singh/" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="https://github.com/adityarsingh" target="_blank" rel="noopener">GitHub</a>
+    <a href="/rss.xml">RSS</a>
   </div>
 </footer>
 
 <style>
 .footer {
-  background-color: var(--color-canvas);
-  border-top: 1px solid var(--color-hairline);
-  padding: var(--spacing-4xl) 0 var(--spacing-xl);
-  margin-top: var(--spacing-5xl);
-}
-.footer-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 48px;
-  align-items: start;
-}
-@media (max-width: 640px) {
-  .footer-inner { grid-template-columns: 1fr; gap: 32px; }
+  padding: 26px 4px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 8px;
 }
 
-.footer-left {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-}
-.footer-brand {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-.footer-logo-mark {
-  width: 26px;
-  height: 26px;
-  border-radius: 6px;
-  background: var(--color-primary);
-  color: var(--color-on-primary);
-  font-size: 10px;
-  font-weight: 600;
-  font-family: var(--font-mono);
-  letter-spacing: 0.02em;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-.footer-brand-name {
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--color-ink);
+.footer p {
+  font-size: 12px;
+  color: var(--color-mute);
   letter-spacing: -0.01em;
 }
-.footer-copy {
+
+.footer-links {
+  display: flex;
+  gap: 16px;
+}
+
+.footer-links a {
+  font-size: 12px;
   color: var(--color-mute);
-  line-height: 20px;
-}
-
-.footer-nav {
-  display: flex;
-  gap: 48px;
-}
-@media (max-width: 480px) { .footer-nav { gap: 32px; } }
-
-.footer-col {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-.footer-col-label {
-  color: var(--color-ink);
-  margin-bottom: 2px;
-}
-.footer-link {
-  font-size: 14px;
-  color: var(--color-body-text);
   text-decoration: none;
-  line-height: 20px;
   letter-spacing: -0.01em;
-  transition: color 0.1s ease;
+  transition: color 0.1s;
 }
-.footer-link:hover { color: var(--color-ink); }
-
-.footer-bottom {
-  max-width: 1100px;
-  margin: 28px auto 0;
-  padding: 16px 24px 0;
-  border-top: 1px solid var(--color-hairline);
-}
-.footer-copy-bottom {
-  color: var(--color-mute);
-}
+.footer-links a:hover { color: var(--color-body-text); }
 </style>

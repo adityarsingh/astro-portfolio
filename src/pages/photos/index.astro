@@ -24,17 +24,15 @@ const breadcrumbSchema = {
 >
   <JsonLd slot="head" schema={breadcrumbSchema} />
 
-  <div class="photos-index">
-    <header class="photos-header">
-      <span class="text-caption-mono photos-eyebrow">Photography</span>
-      <h1 class="text-display-lg">Photos.</h1>
-      <p class="text-body-lg photos-desc">
-        Travels with a camera.
-      </p>
-    </header>
+  <div class="photos-page">
+    <div class="index-header">
+      <span class="eyebrow">Photography</span>
+      <h1>Travels with a camera.</h1>
+      <p>Rajasthan, Vietnam, the Himalayas — and counting.</p>
+    </div>
 
     {albums.length === 0 ? (
-      <p class="text-body-md" style="color: var(--color-mute)">Albums coming soon.</p>
+      <p class="no-albums">Albums coming soon.</p>
     ) : (
       <div class="albums-grid">
         {albums.map(album => (
@@ -55,23 +53,43 @@ const breadcrumbSchema = {
 </BaseLayout>
 
 <style>
-.photos-index {
+.photos-page {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 48px 24px 96px;
 }
-.photos-header {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-bottom: 40px;
+
+.index-header {
+  padding: 8px 4px 32px;
 }
-.photos-eyebrow { color: var(--color-mute); }
-.photos-desc { color: var(--color-body-text); }
+
+.index-header h1 {
+  font-size: clamp(28px, 5vw, 38px);
+  font-weight: 600;
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.index-header p {
+  font-size: 15px;
+  color: var(--color-body-text);
+  line-height: 1.6;
+}
+
 .albums-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
 }
-@media (max-width: 640px) { .albums-grid { grid-template-columns: 1fr; } }
+
+@media (min-width: 900px)  { .albums-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 680px)  { .albums-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 440px)  { .albums-grid { grid-template-columns: 1fr; } }
+
+.no-albums {
+  font-size: 14px;
+  color: var(--color-mute);
+  font-style: italic;
+}
 </style>

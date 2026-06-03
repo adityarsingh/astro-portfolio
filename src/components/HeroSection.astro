@@ -1,149 +1,96 @@
 ---
-import MeshGradient from './MeshGradient.astro';
 ---
 
-<section class="hero">
-  <MeshGradient opacity={0.13} />
+<section class="card hero">
+  <div class="hero-grid">
 
-  <div class="hero-inner">
-    <!-- Text column -->
     <div class="hero-text">
-      <span class="hero-eyebrow text-caption-mono">Content · Search · Automation</span>
-      <h1 class="hero-headline">
-        Hi, I'm Aditya.
-      </h1>
-      <p class="hero-bio text-body-lg">
-        I make content easier to find, manage, and scale. At Akamai, that means combining AI
-        agents, search strategy, and editorial operations — so the website runs well and ranks
-        higher.
+      <h1>Making content easier to find, manage, and scale.</h1>
+
+      <p class="hero-bio">
+        I combine AI agents, search strategy, and editorial operations at Akamai —
+        so the website runs well and ranks higher.
       </p>
-      <div class="hero-cta">
-        <a href="mailto:hello@adityarsingh.in" class="btn-primary">Let's connect →</a>
+
+      <div class="hero-actions">
+        <a href="mailto:hello@adityarsingh.in" class="btn-primary">Get in touch →</a>
+        <a href="/cv/aditya-cv.pdf" class="btn-outline" target="_blank" rel="noopener">Download CV</a>
       </div>
     </div>
 
-    <!-- Photo column -->
-    <div class="hero-photo-wrap" aria-hidden="true">
-      <div class="hero-photo-ring">
-        <div class="hero-photo-inner">
-            <img src="/photos/profile.jpg" alt="Aditya Raj Singh" />
-        </div>
-      </div>
+    <div class="hero-photo-col">
+      <img class="avatar-lg" src="/photos/profile.jpg" alt="Aditya Raj Singh" />
     </div>
+
   </div>
 </section>
 
 <style>
 .hero {
-  position: relative;
-  overflow: hidden;
-  background-color: var(--color-canvas);
-  border-bottom: 1px solid var(--color-hairline);
+  padding: 56px var(--card-px) 52px;
 }
 
-.hero-inner {
-  position: relative;
-  z-index: 1;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 80px 24px 88px;
+.hero-grid {
   display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 64px;
+  grid-template-columns: 1fr 220px;
+  gap: 80px;
   align-items: center;
 }
 
-@media (max-width: 768px) {
-  .hero-inner {
-    grid-template-columns: 1fr;
-    padding: 56px 24px 64px;
-    gap: 40px;
-  }
-  /* Photo above text on mobile */
-  .hero-photo-wrap { order: -1; justify-self: center; }
-}
-
-/* ── Text ── */
 .hero-text {
   display: flex;
   flex-direction: column;
-  gap: 18px;
-  max-width: 560px;
+  gap: 22px;
 }
 
-.hero-eyebrow {
-  color: var(--color-mute);
-  display: block;
-}
-
-.hero-headline {
-  font-size: 52px;
+h1 {
+  font-size: clamp(34px, 4vw, 52px);
   font-weight: 600;
-  line-height: 1.05;
+  line-height: 1.08;
   letter-spacing: -0.04em;
   color: var(--color-ink);
-}
-
-@media (max-width: 640px) {
-  .hero-headline { font-size: 38px; }
+  max-width: 580px;
 }
 
 .hero-bio {
+  font-size: 15px;
+  line-height: 1.72;
   color: var(--color-body-text);
-  line-height: 1.65;
   max-width: 480px;
 }
 
-.hero-cta {
+.hero-actions {
   display: flex;
   gap: 10px;
+  align-items: center;
   flex-wrap: wrap;
-  padding-top: 4px;
+  padding-top: 2px;
 }
 
-/* ── Photo ── */
-.hero-photo-wrap {
-  flex-shrink: 0;
-}
-
-/* Gradient ring via layered background + padding trick */
-.hero-photo-ring {
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  padding: 3px;
-  background: linear-gradient(
-    135deg,
-    #007cf0 0%,
-    #00dfd8 25%,
-    #7928ca 55%,
-    #ff0080 80%,
-    #f9cb28 100%
-  );
-  box-shadow: 0 8px 32px rgba(121, 40, 202, 0.2), 0 2px 8px rgba(0, 124, 240, 0.15);
-}
-
-@media (max-width: 768px) {
-  .hero-photo-ring { width: 160px; height: 160px; }
-}
-
-.hero-photo-inner {
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  overflow: hidden;
-  background-color: var(--color-canvas-soft-2);
+.hero-photo-col {
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.hero-photo-inner img {
-  width: 100%;
-  height: 100%;
+.avatar-lg {
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
   object-fit: cover;
-  object-position: center 25%;
-  display: block;
+  object-position: center 18%;
+  background: var(--color-hairline);
+  outline: 3px solid var(--color-hairline);
+  outline-offset: 3px;
 }
 
+@media (max-width: 860px) {
+  .hero-grid          { grid-template-columns: 1fr; gap: 36px; }
+  .hero-photo-col     { order: -1; }
+  .avatar-lg          { width: 100px; height: 100px; }
+}
+
+@media (max-width: 540px) {
+  .hero { padding: 32px 24px 28px; }
+}
 </style>

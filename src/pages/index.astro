@@ -45,8 +45,53 @@ const breadcrumbSchema = {
   description="I make content easier to find, manage, and scale. At Akamai, that means combining AI agents, search strategy, and editorial operations — so the website runs well and ranks higher."
 >
   <JsonLd slot="head" schema={[personSchema, breadcrumbSchema]} />
-  <HeroSection />
-  <SuperpowersSection />
-  <AboutSection />
-  {posts.length > 0 && <BlogPreviewSection posts={posts} />}
+
+  <div class="cards">
+    <HeroSection />
+    <SuperpowersSection />
+    <AboutSection />
+    {posts.length > 0 && <BlogPreviewSection posts={posts} />}
+
+    <div class="cta-card">
+      <div class="cta-text">
+        <strong>Let's work together.</strong>
+        <span>hello@adityarsingh.in</span>
+      </div>
+      <a href="mailto:hello@adityarsingh.in" class="btn-cta">Send a message →</a>
+    </div>
+  </div>
 </BaseLayout>
+
+<style>
+.cta-card {
+  background: var(--color-cta-bg);
+  border-radius: var(--radius-card);
+  padding: 44px var(--card-px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.cta-text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.cta-text strong {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: var(--color-cta-fg);
+}
+.cta-text span {
+  font-size: 13px;
+  color: var(--color-cta-sub);
+  letter-spacing: -0.01em;
+}
+
+@media (max-width: 540px) {
+  .cta-card { flex-direction: column; align-items: flex-start; gap: 20px; padding: 32px 24px; }
+}
+</style>
