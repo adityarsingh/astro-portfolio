@@ -24,8 +24,11 @@ const { title, description, canonical, og, noindex } = Astro.props;
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <!-- Apply saved theme before first paint to prevent flash -->
-    <script is:inline>
+    <!-- Apply saved theme before first paint to prevent flash.
+         data-cfasync="false" stops Cloudflare Rocket Loader from deferring
+         this script — without it the script runs on window.load (after all
+         images download) and the page flashes light mode the whole time. -->
+    <script is:inline data-cfasync="false">
       (function () {
         var stored = localStorage.getItem('theme');
         // Default is light (warm cream) — only apply dark when user chose it
