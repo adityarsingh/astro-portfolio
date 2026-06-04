@@ -1,6 +1,6 @@
 ---
 const navLinks = [
-  { href: '/blog',   label: 'Writing'   },
+  { href: '/blog',   label: 'Blog'      },
   { href: '/photos', label: 'Photos'    },
 ];
 
@@ -123,7 +123,7 @@ const currentPath = Astro.url.pathname;
 .nav {
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 20px;
   padding: 14px 4px 22px;
 }
 
@@ -139,6 +139,7 @@ const currentPath = Astro.url.pathname;
   display: flex;
   gap: 20px;
   align-items: center;
+  margin-left: auto;
 }
 
 .nav-link {
