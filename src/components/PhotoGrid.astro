@@ -12,6 +12,14 @@ interface Props {
 }
 
 const { images } = Astro.props;
+
+function thumbSrc(src: string): string {
+  const lastSlash = src.lastIndexOf('/');
+  const dir       = src.slice(0, lastSlash);
+  const file      = src.slice(lastSlash + 1);
+  const nameNoExt = file.replace(/\.[^.]+$/, '');
+  return `${dir}/thumbs/${nameNoExt}.webp`;
+}
 ---
 
 <div
@@ -26,12 +34,17 @@ const { images } = Astro.props;
       data-lightbox-index={i}
       aria-label={img.alt}
     >
-      <img
-        src={img.src}
-        alt={img.alt}
-        loading={i < 6 ? 'eager' : 'lazy'}
-        decoding="async"
-      />
+      <picture>
+        <source srcset={thumbSrc(img.src)} type="image/webp" />
+        <img
+          src={img.src}
+          alt={img.alt}
+          loading={i < 6 ? 'eager' : 'lazy'}
+          decoding="async"
+          width={img.width}
+          height={img.height}
+        />
+      </picture>
     </a>
   ))}
 </div>

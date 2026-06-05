@@ -13,11 +13,22 @@ interface Props {
 }
 
 const { slug, title, description, date, location, coverImage, coverAlt, imageCount } = Astro.props;
+
+function thumbSrc(src: string): string {
+  const lastSlash = src.lastIndexOf('/');
+  const dir       = src.slice(0, lastSlash);
+  const file      = src.slice(lastSlash + 1);
+  const nameNoExt = file.replace(/\.[^.]+$/, '');
+  return `${dir}/thumbs/${nameNoExt}.webp`;
+}
 ---
 
 <a href={`/photos/${slug}`} class="album-card">
   <div class="album-cover">
-    <img src={coverImage} alt={coverAlt} loading="lazy" />
+    <picture>
+      <source srcset={thumbSrc(coverImage)} type="image/webp" />
+      <img src={coverImage} alt={coverAlt} loading="lazy" />
+    </picture>
     <div class="album-count text-caption-mono">{imageCount} photos</div>
   </div>
   <div class="album-info">

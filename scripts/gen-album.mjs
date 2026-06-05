@@ -100,3 +100,8 @@ const output = {
 const outPath = `src/content/photos/${id}.json`;
 writeFileSync(outPath, JSON.stringify(output, null, 2) + '\n');
 console.log(`\nWritten → ${outPath}  (${images.length} images)`);
+
+// Generate WebP thumbnails for this album
+console.log('\nGenerating WebP thumbnails...');
+const { execSync } = await import('child_process');
+execSync(`node scripts/gen-thumbs.mjs`, { stdio: 'inherit' });
