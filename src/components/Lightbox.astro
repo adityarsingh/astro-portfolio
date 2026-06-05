@@ -2,39 +2,42 @@
 ---
 
 <dialog id="lightbox" aria-label="Photo lightbox" aria-modal="true">
+  <!-- Full-size inner wrapper — all controls are absolutely positioned inside this -->
+  <div class="lb-inner">
 
-  <!-- Top bar -->
-  <div class="lb-topbar">
-    <span id="lb-counter" class="lb-counter"></span>
-    <button id="lb-close" class="lb-icon-btn" aria-label="Close lightbox">
-      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round">
-        <line x1="3" y1="3" x2="15" y2="15"/>
-        <line x1="15" y1="3" x2="3" y2="15"/>
+    <!-- Top bar -->
+    <div class="lb-topbar">
+      <span id="lb-counter" class="lb-counter"></span>
+      <button id="lb-close" class="lb-icon-btn" aria-label="Close lightbox">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+          <line x1="2" y1="2" x2="14" y2="14"/>
+          <line x1="14" y1="2" x2="2" y2="14"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Image + caption centred in remaining space -->
+    <div class="lb-stage">
+      <div class="lb-spinner" id="lb-spinner" aria-hidden="true"></div>
+      <figure class="lb-figure">
+        <img id="lb-img" src="" alt="" />
+        <figcaption id="lb-caption" class="lb-caption"></figcaption>
+      </figure>
+    </div>
+
+    <!-- Side arrows -->
+    <button id="lb-prev" class="lb-arrow lb-arrow-prev" aria-label="Previous photo">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="13 4 7 10 13 16"/>
       </svg>
     </button>
+    <button id="lb-next" class="lb-arrow lb-arrow-next" aria-label="Next photo">
+      <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <polyline points="7 4 13 10 7 16"/>
+      </svg>
+    </button>
+
   </div>
-
-  <!-- Image stage -->
-  <div class="lb-stage" id="lb-stage">
-    <div class="lb-spinner" id="lb-spinner" aria-hidden="true"></div>
-    <figure class="lb-figure">
-      <img id="lb-img" src="" alt="" />
-      <figcaption id="lb-caption" class="lb-caption"></figcaption>
-    </figure>
-  </div>
-
-  <!-- Side arrows -->
-  <button id="lb-prev" class="lb-arrow lb-arrow-prev" aria-label="Previous photo">
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="14 4 8 11 14 18"/>
-    </svg>
-  </button>
-  <button id="lb-next" class="lb-arrow lb-arrow-next" aria-label="Next photo">
-    <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="8 4 14 11 8 18"/>
-    </svg>
-  </button>
-
 </dialog>
 
 <script>
@@ -45,34 +48,29 @@
   const caption = document.getElementById('lb-caption');
   const counter = document.getElementById('lb-counter');
   const spinner = document.getElementById('lb-spinner');
-  const prevBtn = document.getElementById('lb-prev');
-  const nextBtn = document.getElementById('lb-next');
+  const prevBtn = document.getElementById('lb-prev')     as HTMLButtonElement | null;
+  const nextBtn = document.getElementById('lb-next')     as HTMLButtonElement | null;
 
   let images: LbImage[] = [];
   let current = 0;
 
-  // ── Preload a single image URL in the background ──
-  function preload(src: string) {
-    const img = new Image();
-    img.src = src;
-  }
+  function preload(src: string) { const i = new Image(); i.src = src; }
 
-  // ── Navigate to a given index ──
   function show(index: number) {
     current = (index + images.length) % images.length;
     const item = images[current];
 
-    // Update counter
     if (counter) counter.textContent = `${current + 1} / ${images.length}`;
+    if (caption) caption.textContent = item.caption ?? '';
 
-    // Fade out, swap src, fade in on load
+    // Fade out → swap → fade in
     if (imgEl) {
       imgEl.style.opacity = '0';
-      if (spinner) spinner.style.opacity = '1';
+      if (spinner) spinner.hidden = false;
 
       const onLoad = () => {
         imgEl.style.opacity = '1';
-        if (spinner) spinner.style.opacity = '0';
+        if (spinner) spinner.hidden = true;
         imgEl.removeEventListener('load', onLoad);
       };
       imgEl.addEventListener('load', onLoad);
@@ -80,9 +78,7 @@
       imgEl.alt = item.alt;
     }
 
-    if (caption) caption.textContent = item.caption ?? '';
-
-    // Show/hide arrows at ends (no wrapping visually)
+    // Hide arrows at ends
     if (prevBtn) prevBtn.style.visibility = current === 0 ? 'hidden' : 'visible';
     if (nextBtn) nextBtn.style.visibility = current === images.length - 1 ? 'hidden' : 'visible';
 
@@ -91,7 +87,7 @@
     if (current - 1 >= 0)            preload(images[current - 1].src);
   }
 
-  // ── Open lightbox when a grid item is clicked ──
+  // Open on grid item click
   document.addEventListener('click', (e) => {
     const el = (e.target as HTMLElement).closest('[data-lightbox-index]') as HTMLElement | null;
     if (!el) return;
@@ -102,57 +98,63 @@
     dialog?.showModal();
   });
 
-  // ── Button handlers ──
   document.getElementById('lb-close')?.addEventListener('click', () => dialog?.close());
   prevBtn?.addEventListener('click', () => show(current - 1));
   nextBtn?.addEventListener('click', () => show(current + 1));
 
-  // ── Close on backdrop click ──
+  // Close on backdrop click (target is the dialog itself, not inner content)
   dialog?.addEventListener('click', (e) => { if (e.target === dialog) dialog.close(); });
 
-  // ── Keyboard ──
+  // Keyboard
   document.addEventListener('keydown', (e) => {
     if (!dialog?.open) return;
-    if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   { e.preventDefault(); show(current - 1); }
-    if (e.key === 'ArrowRight' || e.key === 'ArrowDown')  { e.preventDefault(); show(current + 1); }
+    if (e.key === 'ArrowLeft')  { e.preventDefault(); show(current - 1); }
+    if (e.key === 'ArrowRight') { e.preventDefault(); show(current + 1); }
     if (e.key === 'Escape') dialog.close();
   });
 
-  // ── Touch / swipe support ──
+  // Swipe
   let touchStartX = 0;
-  dialog?.addEventListener('touchstart', (e) => {
-    touchStartX = e.touches[0].clientX;
-  }, { passive: true });
+  dialog?.addEventListener('touchstart', (e) => { touchStartX = e.touches[0].clientX; }, { passive: true });
   dialog?.addEventListener('touchend', (e) => {
     const dx = e.changedTouches[0].clientX - touchStartX;
-    if (Math.abs(dx) < 40) return;
-    if (dx < 0) show(current + 1);
-    else        show(current - 1);
+    if (Math.abs(dx) < 50) return;
+    dx < 0 ? show(current + 1) : show(current - 1);
   }, { passive: true });
 </script>
 
 <style>
-/* ── Full-viewport dialog ── */
+/* ── Reset ALL browser dialog defaults ── */
 #lightbox {
-  position: fixed;
-  inset: 0;
-  width: 100%;
-  max-width: 100%;
-  height: 100%;
-  max-height: 100%;
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: transparent;
-  display: flex;
-  flex-direction: column;
+  position: fixed !important;
+  inset: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  max-width: 100vw !important;
+  max-height: 100vh !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+  border-radius: 0 !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  outline: none !important;
   overflow: hidden;
 }
-#lightbox:not([open]) { display: none; }
+#lightbox:not([open]) { display: none !important; }
 #lightbox::backdrop {
-  background: rgba(0, 0, 0, 0.93);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(0, 0, 0, 0.92);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* ── Full-size inner wrapper (all children positioned relative to this) ── */
+.lb-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* ── Top bar ── */
@@ -160,32 +162,30 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 14px 16px 10px;
+  padding: 16px 20px 12px;
   flex-shrink: 0;
-  position: relative;
-  z-index: 2;
 }
 .lb-counter {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.08em;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.4);
 }
 .lb-icon-btn {
-  width: 36px;
-  height: 36px;
+  width: 34px;
+  height: 34px;
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
   border-radius: 50%;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.75);
-  transition: background 0.15s, color 0.15s;
+  color: rgba(255, 255, 255, 0.7);
   padding: 0;
+  transition: background 0.15s, color 0.15s;
 }
-.lb-icon-btn:hover { background: rgba(255, 255, 255, 0.16); color: #fff; }
+.lb-icon-btn:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
 
 /* ── Image stage ── */
 .lb-stage {
@@ -194,55 +194,53 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  padding: 0 72px;
+  padding: 0 80px 24px;
   min-height: 0;
 }
 .lb-figure {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 12px;
+  gap: 10px;
   max-width: 100%;
   max-height: 100%;
 }
 #lb-img {
   max-width: 100%;
-  max-height: calc(100vh - 130px);
+  max-height: calc(100vh - 120px);
   width: auto;
   height: auto;
   object-fit: contain;
-  border-radius: 6px;
+  border-radius: 4px;
   display: block;
   opacity: 1;
-  transition: opacity 0.2s ease;
+  transition: opacity 0.18s ease;
 }
 .lb-caption {
   font-family: var(--font-mono);
   font-size: 11px;
   letter-spacing: 0.05em;
-  color: rgba(255, 255, 255, 0.45);
+  color: rgba(255, 255, 255, 0.4);
   text-align: center;
-  min-height: 14px;
 }
 
-/* ── Loading spinner ── */
+/* ── Spinner ── */
 .lb-spinner {
   position: absolute;
-  width: 28px;
-  height: 28px;
+  width: 26px;
+  height: 26px;
   border: 2px solid rgba(255, 255, 255, 0.15);
-  border-top-color: rgba(255, 255, 255, 0.7);
+  border-top-color: rgba(255, 255, 255, 0.65);
   border-radius: 50%;
-  opacity: 0;
-  transition: opacity 0.15s;
   animation: lb-spin 0.7s linear infinite;
   pointer-events: none;
 }
+.lb-spinner[hidden] { display: none; }
 @keyframes lb-spin { to { transform: rotate(360deg); } }
 
-/* ── Side arrows ── */
+/* ── Side arrows — absolute inside .lb-inner ── */
 .lb-arrow {
-  position: fixed;
+  position: absolute;
   top: 50%;
   transform: translateY(-50%);
   width: 48px;
@@ -250,36 +248,27 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255, 255, 255, 0.08);
-  border: 1px solid rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.18);
   border-radius: 50%;
   cursor: pointer;
-  color: rgba(255, 255, 255, 0.75);
-  transition: background 0.15s, color 0.15s, transform 0.15s;
+  color: rgba(255, 255, 255, 0.8);
   padding: 0;
+  transition: background 0.15s, color 0.15s;
   z-index: 10;
 }
-.lb-arrow:hover {
-  background: rgba(255, 255, 255, 0.18);
-  color: #fff;
-}
-.lb-arrow-prev {
-  left: 14px;
-  transform: translateY(-50%);
-}
-.lb-arrow-next {
-  right: 14px;
-  transform: translateY(-50%);
-}
+.lb-arrow:hover { background: rgba(255, 255, 255, 0.2); color: #fff; }
+.lb-arrow-prev { left: 16px; }
+.lb-arrow-next { right: 16px; }
 .lb-arrow-prev:hover { transform: translateY(-50%) translateX(-2px); }
 .lb-arrow-next:hover { transform: translateY(-50%) translateX(2px); }
 
-/* ── Mobile adjustments ── */
+/* ── Mobile ── */
 @media (max-width: 540px) {
-  .lb-stage { padding: 0 52px; }
+  .lb-stage { padding: 0 56px 20px; }
   .lb-arrow { width: 40px; height: 40px; }
   .lb-arrow-prev { left: 8px; }
   .lb-arrow-next { right: 8px; }
-  #lb-img { max-height: calc(100vh - 110px); }
+  #lb-img { max-height: calc(100vh - 100px); }
 }
 </style>
