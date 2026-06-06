@@ -76,11 +76,6 @@ const breadcrumbSchema = {
         </div>
         <h1 class="text-display-lg post-title">{title}</h1>
         <p class="text-body-lg post-description">{description}</p>
-        {tags.length > 0 && (
-          <div class="post-tags">
-            {tags.map(tag => <TagPill tag={tag} />)}
-          </div>
-        )}
       </header>
 
       {coverImage && (
@@ -92,6 +87,13 @@ const breadcrumbSchema = {
       <div class="prose">
         <slot />
       </div>
+
+      {tags.length > 0 && (
+        <div class="post-tags">
+          <span class="post-tags-label">Tags</span>
+          {tags.map(tag => <TagPill tag={tag} />)}
+        </div>
+      )}
     </article>
   </div>
 </BaseLayout>
