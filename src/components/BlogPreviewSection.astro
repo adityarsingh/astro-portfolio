@@ -103,12 +103,13 @@ const { posts } = Astro.props;
 
 .view-all {
   font-size: 13px;
-  color: var(--color-body-text);
+  font-weight: 500;
+  color: var(--color-ink);
   text-decoration: none;
   letter-spacing: -0.01em;
-  transition: color 0.1s;
+  transition: opacity 0.1s;
 }
-.view-all:hover { color: var(--color-ink); }
+.view-all:hover { opacity: 0.65; }
 
 @media (max-width: 860px) {
   .blog-cards { grid-template-columns: 1fr; margin: 0 calc(-1 * var(--card-px)) 24px; }

@@ -15,7 +15,7 @@
   --color-canvas-soft-2:   #f5f1eb;   /* Hover / active state             */
   --color-ink:             #1a1a1a;   /* Primary text                     */
   --color-body-text:       #545454;   /* Secondary text                   */
-  --color-mute:            #9a9a9a;   /* Disabled / placeholder           */
+  --color-mute:            #767676;   /* Disabled / placeholder           */
   --color-hairline:        #e4dfd7;   /* Subtle borders                   */
   --color-hairline-strong: #c8c0b5;   /* Stronger borders                 */
   --color-primary:         #1a1a1a;   /* CTA / primary button bg          */
@@ -38,8 +38,8 @@
   --color-highlight-pink:  #ff0080;
 
   /* ── Stable tokens ── */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: ui-monospace, 'SFMono-Regular', Menlo, Monaco, monospace;
+  --font-sans: 'Geist Variable', system-ui, -apple-system, sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SFMono-Regular', Menlo, Monaco, monospace;
 
   --spacing-xxs:     4px;
   --spacing-xs:      8px;
@@ -52,7 +52,6 @@
   --spacing-4xl:     64px;
   --spacing-5xl:     96px;
   --spacing-6xl:     128px;
-  --spacing-section: 192px;
 
   --radius-xs:      4px;
   --radius-sm:      6px;
@@ -175,8 +174,8 @@ html.theme-switching *::after {
 ───────────────────────────────────────────────────────────────────────── */
 
 ::selection {
-  background-color: var(--color-ink);
-  color: var(--color-canvas);
+  background-color: #c8b89a;
+  color: var(--color-ink);
 }
 
 html {
@@ -206,7 +205,7 @@ body {
   letter-spacing: -0.04em;
 }
 .text-display-lg {
-  font-size: 32px;
+  font-size: clamp(24px, 3.5vw, 32px);
   font-weight: 600;
   line-height: 1.15;
   letter-spacing: -0.04em;
@@ -408,7 +407,6 @@ body {
   --tw-prose-pre-code:      var(--color-code-text);
   --tw-prose-th-borders:    var(--color-hairline);
   --tw-prose-td-borders:    var(--color-hairline);
-  max-width: 68ch;
 }
 
 .prose h1, .prose h2, .prose h3, .prose h4 {

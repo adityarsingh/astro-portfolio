@@ -6,6 +6,7 @@ import JsonLd from '@/components/JsonLd.astro';
 import { getCollection } from 'astro:content';
 import { getSortedTags } from '@/lib/getTagCounts';
 import { formatDate } from '@/lib/formatDate';
+import { readingTime } from '@/lib/readingTime';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
   const posts = (await getCollection('blog', ({ data }) => !data.draft))
@@ -20,7 +21,10 @@ const allPosts = (await getCollection('blog', ({ data }) => !data.draft))
 const sortedTags = getSortedTags(allPosts).slice(0, 10);
 const uniqueTagCount = new Set(allPosts.flatMap(p => p.data.tags)).size;
 
-const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.com';
+const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.in';
+const avgMins = allPosts.length > 0
+  ? Math.round(allPosts.reduce((sum, p) => sum + readingTime(p.body ?? ''), 0) / allPosts.length)
+  : 6;
 const breadcrumbSchema = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
@@ -67,7 +71,7 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
         </div>
         <div class="meta-divider" aria-hidden="true"></div>
         <div class="meta-item">
-          <span class="meta-num">~6</span>
+          <span class="meta-num">~{avgMins}</span>
           <span class="meta-label">Min avg</span>
         </div>
       </div>
@@ -235,7 +239,7 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 
 .post-row {
   display: grid;
-  grid-template-columns: 72px 1fr auto 18px;
+  grid-template-columns: 72px 1fr minmax(0, 120px) 18px;
   gap: 20px;
   align-items: center;
   padding: 15px 40px;
@@ -270,6 +274,8 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
   text-transform: uppercase;
   color: var(--color-mute);
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .post-arrow { font-size: 12px; color: var(--color-mute); text-align: right; }
@@ -283,6 +289,15 @@ const years = Object.keys(postsByYear).sort((a, b) => Number(b) - Number(a));
 }
 
 @media (max-width: 540px) {
+  .tag-filter {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+  }
+  .tag-filter::-webkit-scrollbar { display: none; }
+
   .header-card { padding: 28px 24px 24px; }
   .year-sep    { padding: 18px 20px 8px; }
 

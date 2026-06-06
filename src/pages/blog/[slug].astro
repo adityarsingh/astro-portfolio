@@ -4,15 +4,20 @@ import BlogLayout from '@/layouts/BlogLayout.astro';
 import { getCollection } from 'astro:content';
 
 export const getStaticPaths: GetStaticPaths = async () => {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
-  return posts.map(post => ({
+  const posts = (await getCollection('blog', ({ data }) => !data.draft))
+    .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
+  return posts.map((post, index) => ({
     params: { slug: post.slug },
-    props: { post },
+    props: {
+      post,
+      prevPost: posts[index + 1] ?? null,  // older post
+      nextPost: posts[index - 1] ?? null,  // newer post
+    },
   }));
 };
 
-const { post } = Astro.props;
-const { Content, remarkPluginFrontmatter } = await post.render();
+const { post, prevPost, nextPost } = Astro.props;
+const { Content } = await post.render();
 
 const rawContent = post.body ?? '';
 ---
@@ -27,6 +32,8 @@ const rawContent = post.body ?? '';
   coverAlt={post.data.coverAlt}
   slug={post.slug}
   rawContent={rawContent}
+  prevPost={prevPost}
+  nextPost={nextPost}
 >
   <Content />
 </BlogLayout>

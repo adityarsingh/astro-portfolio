@@ -25,7 +25,8 @@ const skills = [
 
 <section class="card skills-card">
   <div class="skills-header">
-    <span class="eyebrow">What I do</span>
+    <span class="eyebrow">Expertise</span>
+    <h2 class="section-title">What I do.</h2>
   </div>
   <div class="skills-grid">
     {skills.map((skill) => (
@@ -60,8 +61,10 @@ const skills = [
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: background-color 0.1s;
 }
 .skill-item:last-child { border-right: none; }
+.skill-item:hover { background-color: var(--color-canvas-soft-2); }
 
 .skill-num {
   font-family: var(--font-mono);
