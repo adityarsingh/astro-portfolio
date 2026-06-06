@@ -19,8 +19,6 @@ pnpm-debug.log*
 .env.*
 !.env.example
 
-# generated WebP thumbnails (built by gen-thumbs.mjs at deploy time)
-public/photos/*/thumbs/
 
 # macOS
 .DS_Store
