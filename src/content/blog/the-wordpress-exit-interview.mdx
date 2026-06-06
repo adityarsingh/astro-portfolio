@@ -1,8 +1,10 @@
 ---
 title: "The WordPress Exit Interview"
-description: "Why I migrated from WordPress to Astro — not for the Lighthouse scores, but because the site now matches how I think about it in my head."
+description: "Why I migrated from WordPress to Astro — as a marketer, not a developer — and how AI made the gap between 'I know what I want' and 'I can build it' a lot smaller."
 date: 2026-06-06
-tags: ["web-dev", "side-project"]
+tags: ["web-dev", "side-project", "ai"]
+coverImage: "/blog/wordpress-to-astro-thumbnail.svg"
+coverAlt: "Abstract illustration comparing a tangled WordPress plugin stack on the left with a clean, minimal Astro file structure on the right"
 ---
 
 I've been putting this off.
@@ -10,6 +12,10 @@ I've been putting this off.
 Not the migration — that's done. I mean writing about it. Because every "I moved my site from X to Y" post on the internet follows the same arc: *WordPress was slow, I found a new framework, here are my Lighthouse scores.*
 
 I'll try not to do that to you.
+
+Also, full disclosure upfront: I'm not a web developer. I'm a marketer who works in SEO and content. I know enough to be dangerous with a terminal, but I wouldn't call myself someone who *builds* websites. I manage them. There's a difference.
+
+That distinction matters for how this story goes.
 
 ---
 
@@ -25,42 +31,60 @@ The site worked. It was just... carrying a lot.
 
 The moment that tipped me was loading my own homepage on mobile and watching the spinner go. Not for long. A second, maybe two. But enough to notice. Enough to feel like the site was thinking about showing up rather than just showing up.
 
-I work on web performance for a living. I spend my days thinking about Core Web Vitals and TTFB and crawlability. And my personal website — the one with my name on it — was sitting on a shared WordPress host, loading fonts the slow way, building pages from a database on every single request.
+I spend my days thinking about Core Web Vitals and TTFB and crawlability. My personal website — the one with my name on it — was sitting on a shared WordPress host, loading fonts the slow way, building pages from a database on every single request.
 
 That felt like a plumber with a leaky tap.
 
 ---
 
-I'd been circling Astro for a while. The pitch is simple enough: ship almost zero JavaScript by default, generate everything at build time, and let the HTML do the work.
+I'd been circling Astro for a while. The pitch is simple: ship almost zero JavaScript by default, generate everything at build time, let the HTML do the work.
 
-Which is honestly just... how the web was supposed to work.
+Which is just... how the web was supposed to work.
 
-The migration wasn't dramatic. I'm not going to pretend I rewrote everything from scratch in one heroic weekend. I moved the blog posts into `.mdx` files, set up content collections for the blog and photos, added proper JSON-LD schema (the kind I'd actually recommend to anyone else at work), and pointed the deploy at Cloudflare Pages.
+The catch was that I'd never built anything from scratch. I could edit templates. I could navigate a codebase with enough context. But scaffolding a project with content collections, routing, schema markup, and a component system from nothing? That was firmly outside my lane.
 
-The hardest part was the `<Image />` component. Not hard — just the thing I kept procrastinating on.
+So I used Claude Code.
 
 ---
 
-What surprised me wasn't the speed. I expected that. What surprised me was how much lighter the whole thing felt to *edit*.
+Here's what that actually looked like — because I want to be specific, not vague about it.
 
-With WordPress, adding a post meant logging into an admin panel, dealing with the block editor, remembering which plugin controlled which thing, and hoping the preview looked like the live version. With Astro, I open a `.mdx` file, write, push. That's it. No database. No admin UI. No login page sitting there waiting to be forgotten.
+I didn't just ask it to "build my website." I described what I had, what I wanted, and what I cared about. The tech stack. The content model. The fact that SEO and GEO visibility mattered to me. What pages existed. How the blog worked. What the photos section needed to do.
 
-The site is just files now. Clean files with known contents. The kind of system that doesn't require remembering how it works.
+And then I worked through it, one piece at a time.
+
+It scaffolded the project. Set up content collections for blog posts and photo albums. Wrote the layout components. Added JSON-LD schema on every page — `Person` on the homepage, `Article` on blog posts, `BreadcrumbList` everywhere — the kind of structured data I'd actually recommend to anyone at work. Built the `<Image />` pipeline with AVIF and WebP output. Wired up the sitemap integration. Added an `llms.txt` file because, again, I work in GEO and it felt slightly embarrassing not to have one.
+
+I reviewed everything. Asked questions when I didn't understand a decision. Pushed back on a few things. Changed my mind about the design twice.
+
+It was collaborative in the way that good work usually is — I had the context and the judgment, it had the implementation speed. Neither of us could have done it the same way alone.
+
+---
+
+What surprised me wasn't the speed. I expected that. What surprised me was how much lighter the whole thing felt to *understand*.
+
+With WordPress, I never really knew what was happening inside my own site. There were layers I'd never looked at. Plugins I'd installed and forgotten. Database tables I'd never opened. With Astro, I can read the entire codebase. Every file does something I chose. Nothing is hiding.
+
+The site is just files now. Clean files with known contents.
+
+Editing a post means opening a `.mdx` file, writing, and pushing. No admin panel. No block editor. No login page sitting somewhere waiting to be forgotten. No plugin I installed in 2023 phoning home.
 
 ---
 
 There's a version of this post where I show you the before/after Lighthouse numbers. They're good. But that's not really the point.
 
-The point is that the site now matches how I think about it in my head. Lightweight. Fast by default. No moving parts I can't explain.
+The point is that I built something I actually understand now — without being a developer. The combination of a framework that's honest about what it does and an AI that could translate my requirements into working code meant that the "I'm not technical enough for this" excuse quietly stopped being true.
 
-I spent a lot of energy last year building systems at work that are clean, documented, and easy for someone else to pick up. It felt slightly inconsistent to come home to a personal site that was none of those things.
+I spent a lot of energy last year building systems at work that are clean, documented, and easy for someone else to pick up. It felt inconsistent to come home to a personal site that was none of those things.
 
 Now it isn't.
 
 ---
 
-WordPress is fine. If you're running a content team, or you need a CMS your non-technical colleagues can use, or you just want to get something live without touching a terminal — use it. It earns its place.
+I don't think this means everyone should abandon WordPress. If you're running a content team, or you need a CMS your non-technical colleagues can actually use, or you just want to get something live fast — it earns its place.
 
-But if your site is just *you* — your writing, your photos, a CV, a contact link — you probably don't need a database. You probably don't need six plugins maintaining a fragile truce with each other.
+But if your site is just *you* — your writing, your photos, a CV, a contact link — you probably don't need a database. You probably don't need six plugins in a fragile truce with each other.
 
-You might just need some files and a build step.
+And you probably don't need to be a developer to build something better.
+
+You just need to be clear about what you want.
