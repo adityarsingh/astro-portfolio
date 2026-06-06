@@ -49,7 +49,7 @@ const { posts } = Astro.props;
 
 .blog-card-item {
   background: var(--color-canvas-soft);
-  padding: 28px 30px;
+  padding: 28px var(--card-px);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -116,7 +116,8 @@ const { posts } = Astro.props;
 }
 
 @media (max-width: 540px) {
-  .writing-card { padding: 28px 24px 0; }
-  .blog-cards   { margin: 0 -24px 20px; }
+  .writing-card   { padding: 28px 24px 0; }
+  .blog-cards     { margin: 0 -24px 20px; }
+  .blog-card-item { padding: 24px 24px; }
 }
 </style>
