@@ -52,8 +52,8 @@ const { title, description, canonical, og, noindex } = Astro.props;
     />
     <slot name="head" />
     <!-- Google tag (gtag.js) -->
-    <script is:inline async src="https://www.googletagmanager.com/gtag/js?id=G-0SB7YZPSF7"></script>
-    <script is:inline>
+    <script is:inline data-cfasync="false" async src="https://www.googletagmanager.com/gtag/js?id=G-0SB7YZPSF7"></script>
+    <script is:inline data-cfasync="false">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
