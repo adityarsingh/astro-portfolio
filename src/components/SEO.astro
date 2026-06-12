@@ -25,7 +25,7 @@ const siteName = 'Aditya Raj Singh';
 const siteUrl = Astro.site?.toString().replace(/\/$/, '') ?? 'https://adityarsingh.com';
 const pageUrl = canonical ?? Astro.url.href;
 const ogImage = og.image ? `${siteUrl}${og.image}` : `${siteUrl}/og/default.png`;
-const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
+const fullTitle = title.includes(siteName) ? title : `${title} — ${siteName}`;
 ---
 
 <AstroSEO
@@ -46,7 +46,7 @@ const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
       siteName,
     },
     image: {
-      alt: og.imageAlt ?? `${title} — ${siteName}`,
+      alt: og.imageAlt ?? fullTitle,
     },
   }}
   twitter={{
@@ -54,7 +54,7 @@ const fullTitle = title === siteName ? title : `${title} — ${siteName}`;
     title: fullTitle,
     description,
     image: ogImage,
-    imageAlt: og.imageAlt ?? `${title} — ${siteName}`,
+    imageAlt: og.imageAlt ?? fullTitle,
   }}
   extend={{
     meta: [

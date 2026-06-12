@@ -7,7 +7,7 @@ interface Props {
 const { currentPage, totalPages, baseUrl } = Astro.props;
 
 function pageUrl(n: number) {
-  return n === 1 ? baseUrl : `${baseUrl}/${n}`;
+  return n === 1 ? baseUrl : `${baseUrl}${n}/`;
 }
 ---
 

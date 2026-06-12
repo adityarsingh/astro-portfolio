@@ -15,7 +15,7 @@ const { posts } = Astro.props;
 
   <div class="blog-cards">
     {posts.map(post => (
-      <a href={`/blog/${post.slug}`} class="blog-card-item">
+      <a href={`/blog/${post.slug}/`} class="blog-card-item">
         <div class="blog-card-meta">
           <span>{formatDate(post.data.date, 'short')}</span>
           <span>·</span>
@@ -29,7 +29,7 @@ const { posts } = Astro.props;
   </div>
 
   <div class="writing-footer">
-    <a href="/blog" class="view-all">View all writing →</a>
+    <a href="/blog/" class="view-all">View all writing →</a>
   </div>
 </section>
 
