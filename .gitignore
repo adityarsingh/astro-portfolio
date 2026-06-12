@@ -20,6 +20,11 @@ pnpm-debug.log*
 !.env.example
 
 
+# photo album originals — hosted on Linode Object Storage
+public/photos/bramhatal
+public/photos/rajasthan
+public/photos/vietnam
+
 # macOS
 .DS_Store
 

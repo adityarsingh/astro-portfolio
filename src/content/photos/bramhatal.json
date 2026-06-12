@@ -2,140 +2,140 @@
   "title": "Bramhatal Trek",
   "description": "A winter trek to the frozen Bramhatal lake in the Garhwal Himalayas — rhododendron forests, knee-deep snow, and Mt Trishul looming overhead.",
   "date": "2025-01-15",
-  "coverImage": "/photos/bramhatal/IMG_0247-scaled.jpg",
+  "coverImage": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0247-scaled.webp",
   "coverAlt": "Snow-covered trail through rhododendron forest on the way to Bramhatal lake",
   "location": "Uttarakhand, India",
   "images": [
     {
-      "src": "/photos/bramhatal/IMG_0247-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0247-scaled.webp",
       "alt": "Trail through rhododendron forest on Day 1 from Lohajung",
-      "width": 4032,
-      "height": 3024,
+      "width": 1800,
+      "height": 1350,
       "caption": "Day 1 — Lohajung to Bekaltal"
     },
     {
-      "src": "/photos/bramhatal/IMG_0249-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0249-scaled.webp",
       "alt": "Valley views through the forest canopy",
-      "width": 4032,
-      "height": 3024
+      "width": 1800,
+      "height": 1350
     },
     {
-      "src": "/photos/bramhatal/IMG_0262-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0262-scaled.webp",
       "alt": "Sunlight filtering through the rhododendron trees",
-      "width": 4032,
-      "height": 3024
+      "width": 1800,
+      "height": 1350
     },
     {
-      "src": "/photos/bramhatal/IMG_0288-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0288-scaled.webp",
       "alt": "First glimpses of Himalayan peaks above the treeline",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/IMG_0293-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0293-scaled.webp",
       "alt": "Approach to Bekaltal campsite",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/IMG_0316-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0316-scaled.webp",
       "alt": "Snow on the trail as altitude increases",
-      "width": 4032,
-      "height": 3024
+      "width": 1800,
+      "height": 1350
     },
     {
-      "src": "/photos/bramhatal/IMG_0321-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0321-scaled.webp",
       "alt": "Morning light on the snow-dusted forest",
-      "width": 4032,
-      "height": 3024
+      "width": 1800,
+      "height": 1350
     },
     {
-      "src": "/photos/bramhatal/IMG_0374-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0374-scaled.webp",
       "alt": "Climbing higher on Day 2 toward Bramhatal base",
-      "width": 4032,
-      "height": 3024,
+      "width": 1440,
+      "height": 1920,
       "caption": "Day 2 — Bekaltal to Bramhatal Base"
     },
     {
-      "src": "/photos/bramhatal/IMG_0377-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0377-scaled.webp",
       "alt": "Trail winding through deep snow",
-      "width": 4032,
-      "height": 3024
+      "width": 1800,
+      "height": 1350
     },
     {
-      "src": "/photos/bramhatal/IMG_0409-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0409-scaled.webp",
       "alt": "Panoramic view of the Garhwal Himalayas",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/IMG_0412-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0412-scaled.webp",
       "alt": "Mt Trishul massif appearing through a break in the trees",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/bramhatal-trek-garhwal-himalayas.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/bramhatal-trek-garhwal-himalayas.webp",
       "alt": "Snow-covered Himalayan peaks against a blue sky",
-      "width": 4032,
-      "height": 3024,
+      "width": 1440,
+      "height": 1920,
       "caption": "Day 3 — Summit Day"
     },
     {
-      "src": "/photos/bramhatal/IMG_0446-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0446-scaled.webp",
       "alt": "Sunrise on the peaks above Bramhatal base camp",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/IMG_0449-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0449-scaled.webp",
       "alt": "Final approach through knee-deep snow to the lake",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/IMG_04491-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_04491-scaled.webp",
       "alt": "Looking back at the climb from the lake approach",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/IMG_0450-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0450-scaled.webp",
       "alt": "Bramhatal Lake completely frozen at 12,250 feet",
-      "width": 4032,
-      "height": 3024,
+      "width": 1440,
+      "height": 1920,
       "caption": "Bramhatal Lake at 3,592m"
     },
     {
-      "src": "/photos/bramhatal/IMG_0452-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0452-scaled.webp",
       "alt": "Standing at the edge of the frozen alpine lake",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/IMG_0454-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0454-scaled.webp",
       "alt": "Panoramic view of Bramhatal lake with surrounding peaks",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     },
     {
-      "src": "/photos/bramhatal/IMG_0471-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0471-scaled.webp",
       "alt": "Descending from the lake in afternoon light",
-      "width": 4032,
-      "height": 3024
+      "width": 1800,
+      "height": 1350
     },
     {
-      "src": "/photos/bramhatal/IMG_0483-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0483-scaled.webp",
       "alt": "Mt Trishul towering over the snowfield",
-      "width": 4032,
-      "height": 3024,
+      "width": 1800,
+      "height": 1350,
       "caption": "Mt Trishul (7,120m)"
     },
     {
-      "src": "/photos/bramhatal/IMG_0488-scaled.jpg",
+      "src": "https://adi-web-photos.in-maa-1.linodeobjects.com/photos/bramhatal/IMG_0488-scaled.webp",
       "alt": "Last views of the Garhwal peaks before descending",
-      "width": 4032,
-      "height": 3024
+      "width": 1440,
+      "height": 1920
     }
   ]
 }
