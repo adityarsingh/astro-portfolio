@@ -1,0 +1,25 @@
+# Legacy redirect shortcuts
+/cv     /cv/aditya-resume.pdf   301
+/feed   /rss.xml                301
+/rss    /rss.xml                301
+
+# WordPress → new site (pages)
+/home/          /   301
+/photo-book/    /photos 301
+
+# WordPress → new site (blog posts)
+/paying-bills-without-giving-away-your-inbox/                              /blog/paying-bills-without-giving-away-your-inbox                              301
+/creating-a-security-resource-site-the-building-of-nologs/                 /blog/creating-a-security-resource-site-the-building-of-nologs                 301
+/how-to-sync-your-obsidian-notes-using-linode-object-storage/              /blog/how-to-sync-your-obsidian-notes-using-linode-object-storage              301
+/i-trained-an-ai-on-100-self-help-books/                                   /blog/i-trained-an-ai-on-100-self-help-books                                   301
+/mcp-the-protocol-that-could-rewrite-the-rules-of-ai/                      /blog/mcp-the-protocol-that-could-rewrite-the-rules-of-ai                      301
+/scalable-systems-beat-smart-hacks-every-time/                              /blog/scalable-systems-beat-smart-hacks-every-time                              301
+/selfhost-n8n-linode/                                                       /blog/selfhost-n8n-linode                                                       301
+/the-automation-revolution-how-ai-agents-are-quietly-stealing-your-to-do-list/  /blog/the-automation-revolution-how-ai-agents-are-quietly-stealing-your-to-do-list  301
+/the-claude-learning-curve-i-cracked/                                       /blog/the-claude-learning-curve-i-cracked                                       301
+/the-finite-state-machine-of-spending/                                      /blog/the-finite-state-machine-of-spending                                      301
+/the-quieter-web/                                                           /blog/the-quieter-web                                                           301
+/why-your-read-later-list-is-where-ideas-go-to-die/                        /blog/why-your-read-later-list-is-where-ideas-go-to-die                        301
+/your-financial-operating-system-is-due-for-an-update/                     /blog/your-financial-operating-system-is-due-for-an-update                     301
+/bramhatal-trek-experience/                                                 /blog/bramhatal-trek-experience                                                 301
+/can-ai-write-seo-content-that-ranks/                                       /blog/can-ai-write-seo-content-that-ranks                                       301
