@@ -6,7 +6,7 @@ import tailwindcss from '@tailwindcss/vite';
 export default defineConfig({
   site: 'https://adityarsingh.in',
   output: 'static',
-  trailingSlash: 'always',
+  trailingSlash: 'ignore',
   vite: {
     plugins: [tailwindcss()],
   },
