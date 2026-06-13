@@ -55,6 +55,7 @@ const CLUSTER    = process.env.LINODE_CLUSTER;
 const ACCESS_KEY = process.env.LINODE_ACCESS_KEY;
 const SECRET_KEY = process.env.LINODE_SECRET_KEY;
 const ONLY_ALBUM = process.env.ALBUM ?? null; // optional: process just one album
+const FORCE      = process.env.FORCE === 'true'; // re-upload even if already in bucket
 
 if (!BUCKET || !CLUSTER || !ACCESS_KEY || !SECRET_KEY) {
   console.error(
@@ -107,35 +108,40 @@ async function processAndUpload(filePath, albumName, fileName) {
   const displayKey = `photos/${albumName}/${nameNoExt}.webp`;
   const thumbKey   = `photos/${albumName}/thumbs/${nameNoExt}.webp`;
 
-  // Skip if both versions already exist in the bucket
-  const [displayExists, thumbExists] = await Promise.all([
-    alreadyUploaded(displayKey),
-    alreadyUploaded(thumbKey),
-  ]);
+  // Skip if both versions already exist in the bucket (unless FORCE=true)
+  if (!FORCE) {
+    const [displayExists, thumbExists] = await Promise.all([
+      alreadyUploaded(displayKey),
+      alreadyUploaded(thumbKey),
+    ]);
 
-  if (displayExists && thumbExists) {
-    // Still need dimensions — read from local file without re-uploading
-    const meta = await sharp(filePath)
-      .resize({ width: DISPLAY_W, withoutEnlargement: true })
-      .toBuffer({ resolveWithObject: true });
-    return { url: `${CDN_BASE}/${displayKey}`, width: meta.info.width, height: meta.info.height, skipped: true };
+    if (displayExists && thumbExists) {
+      // Still need dimensions — read from local file without re-uploading
+      const meta = await sharp(filePath)
+        .rotate()                                          // respect EXIF orientation
+        .resize({ width: DISPLAY_W, withoutEnlargement: true })
+        .toBuffer({ resolveWithObject: true });
+      return { url: `${CDN_BASE}/${displayKey}`, width: meta.info.width, height: meta.info.height, skipped: true };
+    }
   }
 
   const [{ data: displayBuf, info: displayInfo }, { data: thumbBuf }] =
     await Promise.all([
       sharp(filePath)
+        .rotate()                                          // respect EXIF orientation
         .resize({ width: DISPLAY_W, withoutEnlargement: true })
         .webp({ quality: 85 })
         .toBuffer({ resolveWithObject: true }),
       sharp(filePath)
+        .rotate()                                          // respect EXIF orientation
         .resize({ width: THUMB_W, withoutEnlargement: true })
         .webp({ quality: 80 })
         .toBuffer({ resolveWithObject: true }),
     ]);
 
   await Promise.all([
-    displayExists ? Promise.resolve() : uploadBuffer(displayKey, displayBuf, 'image/webp'),
-    thumbExists   ? Promise.resolve() : uploadBuffer(thumbKey,   thumbBuf,   'image/webp'),
+    uploadBuffer(displayKey, displayBuf, 'image/webp'),
+    uploadBuffer(thumbKey,   thumbBuf,   'image/webp'),
   ]);
 
   return { url: `${CDN_BASE}/${displayKey}`, width: displayInfo.width, height: displayInfo.height, skipped: false };
@@ -203,8 +209,10 @@ for (const album of albums) {
   for (const file of files) {
     const nameNoExt = basename(file, extname(file));
 
-    // Skip if this image is already in the JSON
-    if (existingBases.has(nameNoExt)) {
+    const alreadyInJson = existingBases.has(nameNoExt);
+
+    // Skip entirely if already in JSON and not forcing a re-upload
+    if (alreadyInJson && !FORCE) {
       console.log(`   ${file}  — already in JSON, skipping`);
       continue;
     }
@@ -214,12 +222,16 @@ for (const album of albums) {
       const result = await processAndUpload(join(albumDir, file), album, file);
       const label  = result.skipped ? '(already in bucket)' : '✓ uploaded';
       console.log(`${label}  ${result.width}×${result.height}`);
-      newEntries.push({
-        src:    result.url,
-        alt:    `${album.charAt(0).toUpperCase() + album.slice(1)}`,  // placeholder — edit this!
-        width:  result.width,
-        height: result.height,
-      });
+
+      // Only add a new JSON entry if the image isn't already listed
+      if (!alreadyInJson) {
+        newEntries.push({
+          src:    result.url,
+          alt:    `${album.charAt(0).toUpperCase() + album.slice(1)}`,  // placeholder — edit this!
+          width:  result.width,
+          height: result.height,
+        });
+      }
     } catch (err) {
       console.log(`✗  ${err.message}`);
     }
