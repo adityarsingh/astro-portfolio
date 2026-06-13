@@ -70,7 +70,7 @@ const PHOTOS_DIR  = 'public/photos';
 const CONTENT_DIR = 'src/content/photos';
 const DISPLAY_W   = 1800;
 const THUMB_W     = 600;
-const SUPPORTED   = new Set(['.jpg', '.jpeg', '.png']);
+const SUPPORTED   = new Set(['.jpg', '.jpeg', '.png', '.heic', '.heif']);
 
 // ── S3 client ─────────────────────────────────────────────────────────────────
 
