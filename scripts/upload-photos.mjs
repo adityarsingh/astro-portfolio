@@ -1,30 +1,38 @@
 #!/usr/bin/env node
 /**
- * One-time migration: processes and uploads all photo albums to Linode Object Storage,
- * then rewrites the JSON content files and AboutSection.astro to use the bucket URLs.
+ * upload-photos.mjs
  *
- * Usage:
- *   LINODE_BUCKET=mybucket LINODE_CLUSTER=us-east-1 \
- *   LINODE_ACCESS_KEY=xxx LINODE_SECRET_KEY=yyy \
- *   node scripts/upload-photos.mjs
+ * Ongoing workflow tool for adding photos to existing albums or creating new ones.
+ * Safe to run repeatedly — skips already-uploaded files and preserves alt text/captions.
  *
- * What it does:
- *   - For each album in public/photos/{album}/:
- *       generates display WebP (max 1800px) → uploads to photos/{album}/{name}.webp
- *       generates thumb  WebP (max  600px) → uploads to photos/{album}/thumbs/{name}.webp
- *   - Rewrites src/content/photos/*.json with bucket URLs + corrected dimensions
- *   - Patches the hardcoded image in src/components/AboutSection.astro
+ * ── Adding photos to an existing album ─────────────────────────────────────────
+ *   1. Drop new photos into public/photos/{album}/
+ *   2. node scripts/upload-photos.mjs
+ *      (or: ALBUM=rajasthan node scripts/upload-photos.mjs  ← only process one album)
+ *   3. New entries are appended to src/content/photos/{album}.json
+ *   4. Edit the JSON to add proper alt text / captions for the new photos
+ *   5. git add src/content/photos/{album}.json && git commit && git push
  *
- * After verifying the build works:
- *   1. Add public/photos/bramhatal public/photos/rajasthan public/photos/vietnam to .gitignore
- *   2. git rm -r --cached public/photos/bramhatal public/photos/rajasthan public/photos/vietnam
- *   3. Remove "node scripts/gen-thumbs.mjs &&" from the build script in package.json
+ * ── Creating a new album ────────────────────────────────────────────────────────
+ *   1. mkdir public/photos/{new-album} and drop photos in it
+ *   2. node scripts/upload-photos.mjs
+ *   3. A starter src/content/photos/{new-album}.json is created — fill in title,
+ *      description, date, location, and alt text for each image
+ *   4. git add src/content/photos/{new-album}.json && git commit && git push
+ *
+ * ── Env vars ────────────────────────────────────────────────────────────────────
+ *   Required: LINODE_BUCKET  LINODE_CLUSTER  LINODE_ACCESS_KEY  LINODE_SECRET_KEY
+ *   Optional: ALBUM=name   — only process this one album (faster)
+ *
+ * ── What it uploads ─────────────────────────────────────────────────────────────
+ *   Display WebP  (max 1800px wide, quality 85) → photos/{album}/{name}.webp
+ *   Thumbnail WebP (max  600px wide, quality 80) → photos/{album}/thumbs/{name}.webp
  */
 
-import { readdirSync, statSync, readFileSync, writeFileSync } from 'fs';
+import { readdirSync, statSync, existsSync, readFileSync, writeFileSync } from 'fs';
 import { join, extname, basename } from 'path';
 import sharp from 'sharp';
-import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
 
 // ── Config ────────────────────────────────────────────────────────────────────
 
@@ -32,6 +40,7 @@ const BUCKET     = process.env.LINODE_BUCKET;
 const CLUSTER    = process.env.LINODE_CLUSTER;
 const ACCESS_KEY = process.env.LINODE_ACCESS_KEY;
 const SECRET_KEY = process.env.LINODE_SECRET_KEY;
+const ONLY_ALBUM = process.env.ALBUM ?? null; // optional: process just one album
 
 if (!BUCKET || !CLUSTER || !ACCESS_KEY || !SECRET_KEY) {
   console.error(
@@ -57,6 +66,15 @@ const s3 = new S3Client({
   forcePathStyle: false,
 });
 
+async function alreadyUploaded(key) {
+  try {
+    await s3.send(new HeadObjectCommand({ Bucket: BUCKET, Key: key }));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 async function uploadBuffer(key, buf, contentType) {
   await s3.send(new PutObjectCommand({
     Bucket: BUCKET,
@@ -70,12 +88,24 @@ async function uploadBuffer(key, buf, contentType) {
 
 // ── Image processing + upload ─────────────────────────────────────────────────
 
-/**
- * Process one image: generate display + thumb WebP, upload both.
- * Returns the public display URL and the actual output dimensions.
- */
 async function processAndUpload(filePath, albumName, fileName) {
-  const nameNoExt = basename(fileName, extname(fileName));
+  const nameNoExt  = basename(fileName, extname(fileName));
+  const displayKey = `photos/${albumName}/${nameNoExt}.webp`;
+  const thumbKey   = `photos/${albumName}/thumbs/${nameNoExt}.webp`;
+
+  // Skip if both versions already exist in the bucket
+  const [displayExists, thumbExists] = await Promise.all([
+    alreadyUploaded(displayKey),
+    alreadyUploaded(thumbKey),
+  ]);
+
+  if (displayExists && thumbExists) {
+    // Still need dimensions — read from local file without re-uploading
+    const meta = await sharp(filePath)
+      .resize({ width: DISPLAY_W, withoutEnlargement: true })
+      .toBuffer({ resolveWithObject: true });
+    return { url: `${CDN_BASE}/${displayKey}`, width: meta.info.width, height: meta.info.height, skipped: true };
+  }
 
   const [{ data: displayBuf, info: displayInfo }, { data: thumbBuf }] =
     await Promise.all([
@@ -89,124 +119,132 @@ async function processAndUpload(filePath, albumName, fileName) {
         .toBuffer({ resolveWithObject: true }),
     ]);
 
-  const displayKey = `photos/${albumName}/${nameNoExt}.webp`;
-  const thumbKey   = `photos/${albumName}/thumbs/${nameNoExt}.webp`;
-
   await Promise.all([
-    uploadBuffer(displayKey, displayBuf, 'image/webp'),
-    uploadBuffer(thumbKey,   thumbBuf,   'image/webp'),
+    displayExists ? Promise.resolve() : uploadBuffer(displayKey, displayBuf, 'image/webp'),
+    thumbExists   ? Promise.resolve() : uploadBuffer(thumbKey,   thumbBuf,   'image/webp'),
   ]);
 
-  return {
-    url:    `${CDN_BASE}/${displayKey}`,
-    width:  displayInfo.width,
-    height: displayInfo.height,
-  };
+  return { url: `${CDN_BASE}/${displayKey}`, width: displayInfo.width, height: displayInfo.height, skipped: false };
+}
+
+// ── Helpers ───────────────────────────────────────────────────────────────────
+
+function loadJson(jsonPath) {
+  if (!existsSync(jsonPath)) return null;
+  return JSON.parse(readFileSync(jsonPath, 'utf8'));
+}
+
+function isBucketUrl(src) {
+  return src && src.startsWith('https://');
+}
+
+// Extract the base filename (without ext) from either a local path or bucket URL
+function baseNameFromSrc(src) {
+  const file = src.split('/').pop();               // "DSC00363.JPG" or "DSC00363.webp"
+  return file.replace(/\.[^.]+$/, '');              // "DSC00363"
 }
 
 // ── Main ──────────────────────────────────────────────────────────────────────
 
-// uploadMap: "album/original-filename.jpg" → { url, width, height }
-const uploadMap = new Map();
-
-const albums = readdirSync(PHOTOS_DIR).filter(entry => {
+let albums = readdirSync(PHOTOS_DIR).filter(entry => {
   const full = join(PHOTOS_DIR, entry);
   return statSync(full).isDirectory() && entry !== 'thumbs';
 });
 
+if (ONLY_ALBUM) {
+  if (!albums.includes(ONLY_ALBUM)) {
+    console.error(`\nAlbum "${ONLY_ALBUM}" not found in ${PHOTOS_DIR}/\n`);
+    process.exit(1);
+  }
+  albums = [ONLY_ALBUM];
+}
+
 console.log(`\nFound ${albums.length} album(s): ${albums.join(', ')}`);
-console.log(`Uploading to: ${CDN_BASE}\n`);
+console.log(`Bucket: ${CDN_BASE}\n`);
 
 for (const album of albums) {
-  const albumDir = join(PHOTOS_DIR, album);
+  const albumDir  = join(PHOTOS_DIR, album);
+  const jsonPath  = join(CONTENT_DIR, `${album}.json`);
+  const isNew     = !existsSync(jsonPath);
+
   const files = readdirSync(albumDir).filter(f => {
     const ext = extname(f).toLowerCase();
     return SUPPORTED.has(ext) && statSync(join(albumDir, f)).isFile();
   });
 
-  console.log(`📁 ${album}  (${files.length} images)`);
+  if (files.length === 0) {
+    console.log(`📁 ${album}  — no images found, skipping\n`);
+    continue;
+  }
+
+  // Build set of base filenames already in the JSON so we don't re-add them
+  const existingData   = loadJson(jsonPath);
+  const existingImages = existingData?.images ?? [];
+  const existingBases  = new Set(existingImages.map(img => baseNameFromSrc(img.src)));
+
+  console.log(`📁 ${album}  (${files.length} images${isNew ? ' — NEW ALBUM' : ''})`);
+
+  const newEntries = [];
 
   for (const file of files) {
+    const nameNoExt = basename(file, extname(file));
+
+    // Skip if this image is already in the JSON
+    if (existingBases.has(nameNoExt)) {
+      console.log(`   ${file}  — already in JSON, skipping`);
+      continue;
+    }
+
     process.stdout.write(`   ${file} … `);
     try {
       const result = await processAndUpload(join(albumDir, file), album, file);
-      uploadMap.set(`${album}/${file}`, result);
-      console.log(`✓  ${result.width}×${result.height}`);
+      const label  = result.skipped ? '(already in bucket)' : '✓ uploaded';
+      console.log(`${label}  ${result.width}×${result.height}`);
+      newEntries.push({
+        src:    result.url,
+        alt:    `${album.charAt(0).toUpperCase() + album.slice(1)}`,  // placeholder — edit this!
+        width:  result.width,
+        height: result.height,
+      });
     } catch (err) {
       console.log(`✗  ${err.message}`);
     }
   }
 
-  console.log();
-}
-
-// ── Update JSON content files ─────────────────────────────────────────────────
-
-function resolveImageSrc(oldSrc, albumName) {
-  // "/photos/bramhatal/IMG_0247-scaled.jpg" → "bramhatal/IMG_0247-scaled.jpg"
-  const fileName = oldSrc.replace(/^\/photos\/[^/]+\//, '');
-  return uploadMap.get(`${albumName}/${fileName}`) ?? null;
-}
-
-const jsonFiles = readdirSync(CONTENT_DIR).filter(f => f.endsWith('.json'));
-
-for (const jsonFile of jsonFiles) {
-  const albumName = jsonFile.replace('.json', '');
-  const jsonPath  = join(CONTENT_DIR, jsonFile);
-  const data      = JSON.parse(readFileSync(jsonPath, 'utf8'));
-  let   changed   = 0;
-
-  if (data.coverImage) {
-    const mapped = resolveImageSrc(data.coverImage, albumName);
-    if (mapped) { data.coverImage = mapped.url; changed++; }
+  if (newEntries.length === 0) {
+    console.log(`   Nothing new to add.\n`);
+    continue;
   }
 
-  if (Array.isArray(data.images)) {
-    data.images = data.images.map(img => {
-      const mapped = resolveImageSrc(img.src, albumName);
-      if (!mapped) return img;
-      changed++;
-      return { ...img, src: mapped.url, width: mapped.width, height: mapped.height };
-    });
+  // ── Write / update JSON ───────────────────────────────────────────────────
+
+  if (isNew) {
+    // Brand new album — create a starter JSON with placeholder metadata
+    const firstEntry = newEntries[0];
+    const starter = {
+      title:       `${album.charAt(0).toUpperCase() + album.slice(1)}`,
+      description: 'Add a description here.',
+      date:        new Date().toISOString().split('T')[0],
+      coverImage:  firstEntry.src,
+      coverAlt:    'Add cover alt text here.',
+      location:    'Add location here.',
+      images:      newEntries,
+    };
+    writeFileSync(jsonPath, JSON.stringify(starter, null, 2) + '\n');
+    console.log(`\n✅  Created ${album}.json with ${newEntries.length} image(s)`);
+    console.log(`   ⚠️  Edit src/content/photos/${album}.json to add title, description, location, and alt text!\n`);
+  } else {
+    // Existing album — append new entries, preserve everything else
+    existingData.images = [...existingImages, ...newEntries];
+    writeFileSync(jsonPath, JSON.stringify(existingData, null, 2) + '\n');
+    console.log(`\n✅  Appended ${newEntries.length} new image(s) to ${album}.json`);
+    console.log(`   ⚠️  Edit src/content/photos/${album}.json to add alt text for the new photos!\n`);
   }
-
-  writeFileSync(jsonPath, JSON.stringify(data, null, 2) + '\n');
-  console.log(`✅  Updated ${jsonFile}  (${changed} URLs)`);
 }
-
-// ── Patch AboutSection.astro hardcoded image ──────────────────────────────────
-
-const aboutPath = 'src/components/AboutSection.astro';
-const aboutKey  = 'bramhatal/bramhatal-trek-garhwal-himalayas.jpg';
-const aboutImg  = uploadMap.get(aboutKey);
-
-if (aboutImg) {
-  const src     = readFileSync(aboutPath, 'utf8');
-  const patched = src.replace(
-    '/photos/bramhatal/bramhatal-trek-garhwal-himalayas.jpg',
-    aboutImg.url,
-  );
-  if (patched !== src) {
-    writeFileSync(aboutPath, patched);
-    console.log(`✅  Updated AboutSection.astro`);
-  }
-} else {
-  console.warn(`⚠️   bramhatal-trek-garhwal-himalayas.jpg not found in upload map — AboutSection.astro unchanged`);
-}
-
-// ── Next steps ────────────────────────────────────────────────────────────────
 
 console.log(`
-✨  Migration complete!
-
-Next steps:
-  1. Verify:  npm run build && npm run preview — check photos load from bucket
-  2. Gitignore the album folders (add to .gitignore):
-       public/photos/bramhatal
-       public/photos/rajasthan
-       public/photos/vietnam
-  3. Remove from git tracking:
-       git rm -r --cached public/photos/bramhatal public/photos/rajasthan public/photos/vietnam
-  4. In package.json build script, remove:  node scripts/gen-thumbs.mjs &&
-  5. Commit the changes
+Done! Next steps:
+  1. Edit the JSON file(s) above to fill in alt text, captions, descriptions
+  2. npm run build  — verify everything looks right
+  3. git add src/content/photos/  &&  git commit  &&  git push
 `);
